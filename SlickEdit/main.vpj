@@ -6,7 +6,7 @@
     VendorName="SlickEdit"
     TemplateName="ada"
     Customized="1"
-    WorkingDir="../../main/">
+    WorkingDir="../main/">
     <Config
         Name="Debug"
         Type="gnuc"
@@ -47,7 +47,7 @@
                 RunFromDir="%rw"
                 ClearProcessBuffer="1"
                 Beep="1">
-                <Exec CmdLine="build.bat"/>
+                <Exec CmdLine="sh ./build.sh %rw"/>
             </Target>
             <Target
                 Name="Rebuild"
@@ -143,7 +143,7 @@
                 RunFromDir="%rw"
                 ClearProcessBuffer="1"
                 Beep="1">
-                <Exec CmdLine="build.bat"/>
+                <Exec CmdLine="sh ./build.sh %rw"/>
             </Target>
             <Target
                 Name="Rebuild"
@@ -207,7 +207,12 @@
         <Folder
             Name="Header Files"
             Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.h++;*.inc;*.sh;*.cpy;*.if"
-            GUID="{6B2DD54C-847C-43E8-2E0B-3884390D4E88}"/>
+            GUID="{6B2DD54C-847C-43E8-2E0B-3884390D4E88}">
+            <F
+                N="../main/*.sh"
+                Recurse="0"
+                Excludes=""/>
+        </Folder>
         <Folder
             Name="Resource Files"
             Filters="*.ico;*.cur;*.dlg"
@@ -219,6 +224,19 @@
         <Folder
             Name="Other Files"
             Filters=""
-            GUID="{B68D450C-7B57-4386-58FD-5665FCEBFBAB}"/>
+            GUID="{B68D450C-7B57-4386-58FD-5665FCEBFBAB}">
+            <F
+                N="../main/*.ad*"
+                Recurse="0"
+                Excludes=""/>
+            <F
+                N="../main/*.bat"
+                Recurse="0"
+                Excludes=""/>
+            <F
+                N="../main/*.gpr"
+                Recurse="0"
+                Excludes=""/>
+        </Folder>
     </Files>
 </Project>

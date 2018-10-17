@@ -205,7 +205,12 @@
         <Folder
             Name="Header Files"
             Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.h++;*.inc;*.sh;*.cpy;*.if"
-            GUID="{C7BA91AC-4421-4F46-F9E3-B886DB0654B7}"/>
+            GUID="{C7BA91AC-4421-4F46-F9E3-B886DB0654B7}">
+            <F
+                N="../../gpr/*.sh"
+                Recurse="0"
+                Excludes=""/>
+        </Folder>
         <Folder
             Name="Resource Files"
             Filters="*.ico;*.cur;*.dlg"
@@ -219,9 +224,13 @@
             Filters=""
             GUID="{F7FD3E8B-8043-468B-DAF8-FFB6893882A5}">
             <F
-                N="/gpr/*.gpr"
+                N="../../gpr/*.bat"
                 Recurse="0"
-                Excludes=".svn/"/>
+                Excludes=""/>
+            <F
+                N="../../gpr/*.gpr"
+                Recurse="0"
+                Excludes=""/>
         </Folder>
     </Files>
 </Project>

@@ -1,0 +1,22 @@
+--with "aunit";
+with "base";
+with "gnoga";
+with "framework";
+with "root";
+
+library project Application_library is
+
+   for Languages use ("Ada");
+   for Object_Dir use Root.Object_Directory;
+   for Library_Name use "application_library";
+   for Library_Kind use Base.Library_Kind;
+   for Library_Dir use Root.Library_Directory;
+   for Source_Files use (
+      "types.ads",
+      "widget.ads",
+      "widget.adb"
+   );
+
+   package Compiler renames Root.Compiler;
+
+end Application_library;

@@ -1,0 +1,16 @@
+source ./environment.sh
+PROJECT_DIRECTORY=$1
+export PROJECT_DIRECTORY
+echo PROJECT_DIRECTORY $PROJECT_DIRECTORY
+
+echo ARCHITECTURE $ARCHITECTURE
+echo BASE_PATH $BASE_PATH
+echo GPR_DIRECTORY $GPR_DIRECTORY
+echo LIB $LIB
+echo PATH $PATH
+echo PROJECT $PROJECT
+echo TARGET $TARGET
+echo USER $USER
+
+killall -9 main
+gprbuild -p -P $PROJECT -aP ../lib -aP ../main -aP $GPR_DIRECTORY  -j10 -d -F

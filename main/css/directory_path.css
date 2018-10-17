@@ -1,0 +1,92 @@
+body.directory_path {
+    display: block;
+}
+
+div.directory_path-container {
+    display: block;
+}
+
+form.directory_path {
+    display: block;
+}
+
+div.directory_path-title {
+    background-color: White;
+    display: flex;
+    flex-direction: row;
+    padding: 3px;
+}
+
+div.directory_path-title_label {
+    background-color: White;
+    color: black;
+    padding-right: 3px;
+}
+
+div.directory_path-title_text {
+    background-color: Gainsboro;
+    color: black;
+}
+
+div.directory_path-prompt {
+    background-color: White;
+    display: flex;
+    flex-direction: row;
+    padding-right: 4px;
+}
+
+div.directory_path-prompt_label {
+    background-color: White;
+    color: black;
+    font-size: 14px;
+}
+
+table.directory_path {
+    display: block;
+    border-spacing: 0;
+    overflow: scroll;
+    background-color: Gainsboro;
+}
+
+input.directory_path-edit_field {
+    font-size: 14px;
+}
+
+button.directory_path-directory_color {
+    background-color: Gainsboro;
+    color: black;
+    font-size: 14px;
+}
+
+button.directory_path-file_color {
+    background-color: Gainsboro;
+    color: green;
+    font-size: 14px;
+}
+
+button.directory_path-special_color {
+    background-color: Gainsboro;
+    color: red;
+    font-size: 14px;
+}
+
+button.directory_path-date {
+    border-width:0;
+}
+
+button.directory_path-actions {
+    font-size: 14px;
+    margin: 10px;
+    background-color: LightBlue;
+}
+
+tr.directory_path {
+    background-color: Gainsboro;
+    padding: 0;
+}
+
+div.directory_path-table {
+    background-color: Gainsboro;
+}
+
+

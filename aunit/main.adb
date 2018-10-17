@@ -1,19 +1,54 @@
 with Ada.Command_Line;
 --with Ada_Lib_AUnit_Lib;
 with Ada.Text_IO;use Ada.Text_IO;
+--with Aunit.Assertions; use Aunit.Assertions;
 with AUnit.Options;
 with AUnit.Reporter.Text;
 with AUnit.Run;
+with CAC.Interrupt;
+with CAC.Interrupt_Names;
 with CAC.Unit_Test.Expression_Filter;
 with CAC.OS;
-with CAC.Trace; use CAC.Trace;
+with CAC.Trace.Tasks; use CAC.Trace;
 with Command_Line_Iterator;
 with Framework;
+with GNOGA;
 with Main_Suite;
+with Main_Tests;
+with Top_Window_Suite;
+with Top_Window_Tests;
 
 procedure Main is
 
+   package Interrupt_Handler is
+
+      type Handler_Type          is new CAC.Interrupt.Handler_Type with null record;
+
+      overriding
+      procedure Signal (
+         Interrupt            : in   CAC.Interrupt_Names.Interrupt_Type;
+         Handler              : in out Handler_Type);
+
+   end Interrupt_Handler;
+
+   ---------------------------------------------------------------
+   package body Interrupt_Handler is
+
+      ------------------------------------------------------------
+      procedure Signal (
+         Interrupt            : in   CAC.Interrupt_Names.Interrupt_Type;
+         Handler              : in out Handler_Type) is
+      pragma Unreferenced (Interrupt, Handler);
+      ------------------------------------------------------------
+
+      begin
+         CAC.Trace.Tasks.Report;
+      end Signal;
+
+   end Interrupt_Handler;
+
    procedure Main_Suite_Runner is new AUnit.Run.Test_Runner (Main_Suite.Suite);
+   procedure Top_Window_Suite_Runner is new AUnit.Run.Test_Runner (Top_Window_Suite.Suite);
 
    ----------------------------------------------------------------------------
    procedure Help is
@@ -23,16 +58,28 @@ procedure Main is
       Put_Line (Ada.Command_Line.Command_Name);
       Put_Line ("   -e <expression>    filter expression");
       Put_Line ("   -h                 this message");
+      Put_Line ("   -i                 interactive mode");
       Put_Line ("   -p                 enable debug pause");
       Put_Line ("   -s <test suite>    select test suite to run");
       Put_Line ("   -S <test suite>    inhibit test suite to run");
       Put_Line ("   -t <trace option>  select trace to turn on");
       Put_Line ("   -T <trace output option>  select trace option to change default");
       Put_Line ("trace options:");
+      Put_Line ("   -a                 all");
+      Put_Line ("   -f                 framework");
+      Put_Line ("   -g                 gnoga");
+      Put_Line ("   -t                 test");
+      New_Line;
+      Put_Line ("  <test suite>");
+      Put_Line ("   m                  main");
+      Put_Line ("   t                  top window");
+
       CAC.OS.Immediate_Halt (0);
    end Help;
 
+   Break_Handler                 : aliased Interrupt_Handler.Handler_Type;
    Do_Main_Suite                 : boolean := True;
+   Do_Top_Window_Suite           : boolean := True;
    Filter                        : aliased CAC.Unit_Test.Expression_Filter.Filter_Type;
    Iterator                      : Command_Line_Iterator.Iterator_Type :=
                                     Command_Line_Iterator.Initialize (
@@ -44,6 +91,9 @@ procedure Main is
    Reporter : AUnit.Reporter.Text.Text_Reporter;
 
 begin
+   CAC.Interrupt.Attach_Handler (CAC.Interrupt_Names.SIGTERM,
+      Break_Handler'unchecked_access);
+
    begin
       Options.Filter := Filter'unchecked_access;
 
@@ -66,8 +116,12 @@ begin
                   when 'h' =>
                      Help;
 
+                  when 'i' =>
+                     Top_Window_Tests.Interactive := True;
+
                   when 's' =>    -- suites to include
                      Do_Main_Suite := False;
+                     Do_Top_Window_Suite := False;
 
                      declare
                         Options     : constant String := Iterator.Get_Parameter;
@@ -79,24 +133,8 @@ begin
                            when 'm' =>
                               Do_Main_Suite := True;
 
---                            if Options'length > 1 then
---                               Main_Suite.Do_Dictionary_Tests := False;
---                            end if;
---
---                            for Index in Options'first + 1 .. OPtions'last  loop
---                               declare
---                                  Option : constant Character := Options (Index);
---
---                               begin
---                                  case Option is
---
---                                     when others =>
---                                        Put_Line ("unexpected data suite option '" & Option & "'");
---                                        Help;
---
---                                  end case;
---                               end;
---                            end loop;
+                           when 't' =>
+                              Do_Top_Window_Suite := True;
 
                            when others =>
                               Put_Line ("unexpected suite option '" & Suite & "'");
@@ -116,11 +154,53 @@ begin
                            when 'm' =>
                               Do_Main_Suite := False;
 
+                           when 't' =>
+                              Do_Top_Window_Suite := False;
+
                            when others =>
                               Put_Line ("unexpected suite option '" & Suite & "'");
                               Help;
 
                         end case;
+                     end;
+
+                  when 't' =>
+                     declare
+                        Parameter   : constant String := Iterator.Get_Parameter;
+
+                     begin
+                        for Index in Parameter'range  loop
+                           declare
+                              Trace    : constant Character := Parameter (Index);
+
+                           begin
+                              case Trace is
+
+                                 when 'a' =>
+                                    Framework.Debug := True;
+                                    GNOGA.Debug := True;
+                                    Main_Tests.Debug := True;
+                                    Top_Window_Tests.Debug := True;
+
+                                 when 'f' =>
+                                    Framework.Debug := True;
+
+                                 when 'g' =>
+                                    GNOGA.Debug := True;
+
+                                 when 'm' =>
+                                    Main_Tests.Debug := True;
+
+                                 when 't' =>
+                                    Top_Window_Tests.Debug := True;
+
+                                 when Others =>
+                                    Put_Line ("invalid option '" & Option & "'");
+                                    CAC.OS.Immediate_Halt (-1);
+
+                              end case;
+                           end;
+                        end loop;
                      end;
 
 --                when 'T' =>
@@ -182,17 +262,20 @@ begin
          Log (Framework.Debug, Here, Who & " end main suite");
       end if;
 
+      if Do_Top_Window_Suite then
+         Log (Framework.Debug, Here, Who & " start Top_Window suite");
+         Top_Window_Suite_Runner (Reporter, Options);
+         Log (Framework.Debug, Here, Who & " end Top_Window suite");
+      end if;
 
    exception
       when Fault: others =>
          Trace_Exception (Fault, Here, Who);
 
    end;
--- DB_View.GNOGA_Lib.Terminate_GNOGA;
    Put_Line ("all tests completed");
-   delay 0.1;     -- let any tasks ready to stop finish
--- Tasks.Report;
---   Assert (Tasks.All_Stopped, "not all tasks stopped");
+   CAC.Interrupt.Cleanup;
+   CAC.Trace.Tasks.Report;
    log (Framework.Debug, here, Who);
 
 exception

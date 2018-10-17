@@ -1,0 +1,122 @@
+V "GNAT Lib v2017"
+A -gnatA
+A -fstack-check=specific
+A -g
+A -gnat12
+A -gnata
+A -gnatf
+A -gnato
+A -gnatVa
+A -gnatwa
+A -gnatwl
+A -gnatVa
+A -gnat2012
+A -mmacosx-version-min=10.13.7
+A -mtune=core2
+A -fPIC
+A -feliminate-unused-debug-symbols
+P SS ZX
+
+RN
+RV NO_DISPATCH
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+
+U widget%b		widget.adb		18a5a048 NE OO PK
+
+U widget%s		widget.ads		19665207 EE NE OO PK
+W gnoga%s		gnoga.adb		gnoga.ali
+W gnoga.application%s	gnoga-application.adb	gnoga-application.ali
+W gnoga.application.multi_connect%s  gnoga-application-multi_connect.adb  gnoga-application-multi_connect.ali
+W gnoga.gui%s		gnoga-gui.ads		gnoga-gui.ali
+W gnoga.gui.window%s	gnoga-gui-window.adb	gnoga-gui-window.ali
+
+D ada.ads		20170516105951 76789da1 ada%s
+D a-charac.ads		20170516105954 2d3ec45b ada.characters%s
+D a-chlat1.ads		20170516105952 66457d31 ada.characters.latin_1%s
+D a-contai.ads		20170516105950 61e5e089 ada.containers%s
+D a-cohata.ads		20170516105956 80a8c839 ada.containers.hash_tables%s
+D a-conhel.ads		20170516105951 20298884 ada.containers.helpers%s
+D a-cihama.ads		20170516105952 bece8dbf ada.containers.indefinite_hashed_maps%s
+D a-coinve.ads		20170516105956 b7300cfa ada.containers.indefinite_vectors%s
+D a-convec.ads		20170516105955 7e2b0fdf ada.containers.vectors%s
+D a-except.ads		20170516105953 291912d5 ada.exceptions%s
+D a-finali.ads		20170516105954 bf4f806b ada.finalization%s
+D a-iteint.ads		20170516105952 7c7305e9 ada.iterator_interfaces%s
+D a-stream.ads		20170516105952 119b8fb3 ada.streams%s
+D a-string.ads		20170516105953 90ac6797 ada.strings%s
+D a-strhas.ads		20170516105955 c71c2a52 ada.strings.hash%s
+D a-strmap.ads		20170516105953 e8bb714a ada.strings.maps%s
+D a-strunb.ads		20170516105950 ecdfa332 ada.strings.unbounded%s
+D a-tags.ads		20170516105955 d3a89129 ada.tags%s
+D a-unccon.ads		20170516105954 31484697 ada.unchecked_conversion%s
+D gnoga.ads		20180418135727 c383f8de gnoga%s
+D gnoga-application.ads	20180407001203 ba55d0ed gnoga.application%s
+D gnoga-application-multi_connect.ads  20180407001203 230f1cb2 gnoga.application.multi_connect%s
+D gnoga-gui.ads		20180407001203 4fc9271e gnoga.gui%s
+D gnoga-gui-base.ads	20180407001203 8fa2efec gnoga.gui.base%s
+D gnoga-gui-document.ads  20180407001203 32801771 gnoga.gui.document%s
+D gnoga-gui-element.ads	20180407001203 93bd39fa gnoga.gui.element%s
+D gnoga-gui-location.ads  20180407001203 ca5576d7 gnoga.gui.location%s
+D gnoga-gui-window.ads	20180407001203 9a66dfec gnoga.gui.window%s
+D gnoga-server.ads	20180407001203 d864b7ea gnoga.server%s
+D gnoga-server-connection.ads  20180418135716 7899017b gnoga.server.connection%s
+D gnoga-types.ads	20180407001203 9591e1a8 gnoga.types%s
+D gnoga-types-colors.ads  20180407001203 8e053145 gnoga.types.colors%s
+D interfac.ads		20170516105950 5ab55268 interfaces%s
+D i-c.ads		20170516105948 5421119b interfaces.c%s
+D system.ads		20170516105953 085b6ffb system%s
+D s-atacco.ads		20170516105954 4c36d12f system.address_to_access_conversions%s
+D s-atocou.ads		20170516105956 b45c2d8d system.atomic_counters%s
+D s-exctab.ads		20170516105954 54135002 system.exception_table%s
+D s-finmas.ads		20170516105954 7811a767 system.finalization_masters%s
+D s-finroo.ads		20170516105954 4ff27390 system.finalization_root%s
+D s-multip.ads		20170516105948 38ac9f73 system.multiprocessors%s
+D s-oscons.ads		20170516200647 bc09da3b system.os_constants%s
+D s-osinte.ads		20170516105954 8eb5b5b4 system.os_interface%s
+D s-parame.ads		20170516105955 7e2a0d7f system.parameters%s
+D s-pooglo.ads		20170516105948 ede33ef8 system.pool_global%s
+D s-secsta.ads		20170516105955 9751b57e system.secondary_stack%s
+D s-soflin.ads		20170516105951 14e1eb6c system.soft_links%s
+D s-stache.ads		20170516105955 a37c21ec system.stack_checking%s
+D s-stausa.ads		20170516105954 017a0a05 system.stack_usage%s
+D s-stalib.ads		20170516105955 09bd3940 system.standard_library%s
+D s-stoele.ads		20170516105956 2dc34a04 system.storage_elements%s
+D s-stoele.adb		20170516105954 ed88f8fb system.storage_elements%b
+D s-stopoo.ads		20170516105951 b16154c2 system.storage_pools%s
+D s-stposu.ads		20170516105949 97a6219c system.storage_pools.subpools%s
+D s-stratt.ads		20170516105949 aedef97e system.stream_attributes%s
+D s-tasinf.ads		20170516105952 801abd01 system.task_info%s
+D s-taspri.ads		20170516105950 f40ac08d system.task_primitives%s
+D s-taskin.ads		20170516105956 05d6152c system.tasking%s
+D s-taprob.ads		20170516105950 acd6094d system.tasking.protected_objects%s
+D s-tpoben.ads		20170516105956 60ad3dae system.tasking.protected_objects.entries%s
+D s-traent.ads		20170516105950 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20170516105953 34867c83 system.unsigned_types%s
+D widget.ads		20180923132640 a00f9159 widget%s
+D widget.adb		20180923132859 b8aa3111 widget%b
+X 12 a-iteint.ads
+24h9 Forward_Iterator
+32h9 Reversible_Iterator<24R9[9|72]>
+X 20 gnoga.ads
+40K9*Gnoga 82e10 63|1r6 2r6 7r31 8r31 64|6r31 7r31
+X 21 gnoga-application.ads
+38K15*Application 77e22 63|1r12 8r37 64|7r37
+X 22 gnoga-application-multi_connect.ads
+44K27*Multi_Connect 90e36 63|1w24 8r49 64|7r49
+46W12*Connection_Holder_Type{30|88W19} 63|8r63 64|7r63
+X 23 gnoga-gui.ads
+38K15*Gui 39e14 63|2r12 7r37 64|6r37
+X 28 gnoga-gui-window.ads
+48K19*Window 342e21 63|2w16 7r41 64|6r41
+56R9*Window_Type<24|51R9> 341e17 63|7r48 64|6r48
+X 49 s-stausa.ads
+203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
+268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
+X 63 widget.ads
+4K9*Widget 10l5 10e11 64|2b14 15l5 15t11
+6U14*Connection_Handler 7=7 8^7 64|5b14 12l8 12t26
+7c7 Main_Window<28|56R9> 64|6b7
+8p7 Connection(22|46W12) 64|7b7
+

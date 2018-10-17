@@ -1,1 +1,17 @@
---with "aunit";with "base";with "root";library project Framework is   for Object_Dir use Root.Object_Directory;   for Library_Name use "framework";   for Library_Kind use Base.Library_Kind;   for Library_Dir use Root.Library_Directory;   case Base.Architecture is      when "windows" =>         for Languages use ("Ada");--       for Source_Dirs use (Base.OS, ".");      when "linux" =>--       for Source_Dirs use (Base.OS, "linux", ".");         for Languages use ("Ada");      when others =>--       for Source_Dirs use (Base.OS, ".");         for Languages use ("Ada");   end case;   package Compiler renames Root.Compiler;end Framework;
+--with "aunit";
+with "base";
+with "gnoga";
+with "root";
+
+library project Framework is
+
+   for Languages use ("Ada");
+   for Object_Dir use Root.Object_Directory;
+   for Library_Name use "framework";
+   for Library_Kind use Base.Library_Kind;
+   for Library_Dir use Root.Library_Directory;
+   for Source_Dirs use (".");
+
+   package Compiler renames Root.Compiler;
+
+end Framework;

@@ -1,0 +1,583 @@
+V "GNAT Lib v2017"
+A -gnatA
+A -fstack-check=specific
+A -g
+A -gnat12
+A -gnata
+A -gnatf
+A -gnato
+A -gnatVa
+A -gnatwa
+A -gnatwl
+A -gnatVa
+A -gnat2012
+A -mmacosx-version-min=10.14.0
+A -mtune=core2
+A -fPIC
+A -feliminate-unused-debug-symbols
+P SS ZX
+
+RN
+RV NO_DISPATCH
+RV NO_DISPATCHING_CALLS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTION_PROPAGATION
+RV NO_EXCEPTIONS
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_UNCHECKED_ACCESS
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_ELABORATION_CODE
+RV SPARK_05
+
+U framework.docker_view%b  framework-docker_view.adb  65fc1921 OO PK
+W ada.exceptions%s	a-except.adb		a-except.ali
+W cac%s			cac.ads			cac.ali
+W cac.trace%s		cac-trace.adb		cac-trace.ali
+W framework%s		framework.adb		framework.ali
+W gnoga%s		gnoga.adb		gnoga.ali
+W gnoga.gui%s		gnoga-gui.ads		gnoga-gui.ali
+W gnoga.gui.element%s	gnoga-gui-element.adb	gnoga-gui-element.ali
+W interfaces%s		interfac.ads		interfac.ali
+W system.assertions%s	s-assert.adb		s-assert.ali
+W system.concat_3%s	s-conca3.adb		s-conca3.ali
+
+U framework.docker_view%s  framework-docker_view.ads  e69fc257 EE OO PF PK
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W framework%s		framework.adb		framework.ali
+W gnoga%s		gnoga.adb		gnoga.ali
+W gnoga.gui%s		gnoga-gui.ads		gnoga-gui.ali
+W gnoga.gui.base%s	gnoga-gui-base.adb	gnoga-gui-base.ali
+W gnoga.gui.view%s	gnoga-gui-view.adb	gnoga-gui-view.ali
+W gnoga.gui.view.card%s	gnoga-gui-view-card.adb	gnoga-gui-view-card.ali
+W gnoga.gui.view.docker%s  gnoga-gui-view-docker.adb  gnoga-gui-view-docker.ali
+W system%s		system.ads		system.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.storage_elements%s  s-stoele.adb	s-stoele.ali
+
+D ada.ads		20170516105951 76789da1 ada%s
+D a-calend.ads		20170516105954 2d5f01d4 ada.calendar%s
+D a-charac.ads		20170516105954 2d3ec45b ada.characters%s
+D a-chlat1.ads		20170516105952 66457d31 ada.characters.latin_1%s
+D a-contai.ads		20170516105950 61e5e089 ada.containers%s
+D a-cohata.ads		20170516105956 80a8c839 ada.containers.hash_tables%s
+D a-conhel.ads		20170516105951 20298884 ada.containers.helpers%s
+D a-cihama.ads		20170516105952 bece8dbf ada.containers.indefinite_hashed_maps%s
+D a-coinve.ads		20170516105956 b7300cfa ada.containers.indefinite_vectors%s
+D a-convec.ads		20170516105955 7e2b0fdf ada.containers.vectors%s
+D a-except.ads		20170516105953 291912d5 ada.exceptions%s
+D a-finali.ads		20170516105954 bf4f806b ada.finalization%s
+D a-iteint.ads		20170516105952 7c7305e9 ada.iterator_interfaces%s
+D a-reatim.ads		20170516105950 a87e2da7 ada.real_time%s
+D a-stream.ads		20170516105952 119b8fb3 ada.streams%s
+D a-string.ads		20170516105953 90ac6797 ada.strings%s
+D a-strfix.ads		20170516105956 d07c346e ada.strings.fixed%s
+D a-strhas.ads		20170516105955 c71c2a52 ada.strings.hash%s
+D a-strmap.ads		20170516105953 e8bb714a ada.strings.maps%s
+D a-stmaco.ads		20170516105950 1c0e5368 ada.strings.maps.constants%s
+D a-strunb.ads		20170516105950 ecdfa332 ada.strings.unbounded%s
+D a-tags.ads		20170516105955 d3a89129 ada.tags%s
+D a-taside.ads		20170516105954 c6417f71 ada.task_identification%s
+D a-unccon.ads		20170516105954 31484697 ada.unchecked_conversion%s
+D a-uncdea.ads		20170516105954 f15a5ed1 ada.unchecked_deallocation%s
+D cac.ads		20180728151120 a8a8bcca cac%s
+D cac-trace.ads		20180825185213 bf9ed4b6 cac.trace%s
+D framework.ads		20181004180004 6d8e64cb framework%s
+D framework-docker_view.ads  20181006002101 522a4959 framework.docker_view%s
+D framework-docker_view.adb  20181004180016 1bf5bd34 framework.docker_view%b
+D gnat.ads		20170516105956 fd2ad2f1 gnat%s
+D g-souinf.ads		20170516105955 291df751 gnat.source_info%s
+D gnoga.ads		20180418135727 c383f8de gnoga%s
+D gnoga-application.ads	20180407001203 ba55d0ed gnoga.application%s
+D gnoga-application-multi_connect.ads  20180407001203 230f1cb2 gnoga.application.multi_connect%s
+D gnoga-gui.ads		20180407001203 4fc9271e gnoga.gui%s
+D gnoga-gui-base.ads	20180407001203 8fa2efec gnoga.gui.base%s
+D gnoga-gui-document.ads  20180407001203 32801771 gnoga.gui.document%s
+D gnoga-gui-element.ads	20180407001203 93bd39fa gnoga.gui.element%s
+D gnoga-gui-location.ads  20180407001203 ca5576d7 gnoga.gui.location%s
+D gnoga-gui-view.ads	20180407001203 c5fa7290 gnoga.gui.view%s
+D gnoga-gui-view-card.ads  20180407001203 92900bcc gnoga.gui.view.card%s
+D gnoga-gui-view-docker.ads  20180407001203 c4090be5 gnoga.gui.view.docker%s
+D gnoga-gui-window.ads	20180407001203 9a66dfec gnoga.gui.window%s
+D gnoga-server.ads	20180407001203 d864b7ea gnoga.server%s
+D gnoga-server-connection.ads  20180418135716 7899017b gnoga.server.connection%s
+D gnoga-types.ads	20180407001203 9591e1a8 gnoga.types%s
+D gnoga-types-colors.ads  20180407001203 8e053145 gnoga.types.colors%s
+D interfac.ads		20170516105950 5ab55268 interfaces%s
+D i-c.ads		20170516105948 5421119b interfaces.c%s
+D strings.ads		20180807110028 8296c9cc strings%s
+D system.ads		20170516105953 085b6ffb system%s
+D s-atacco.ads		20170516105954 4c36d12f system.address_to_access_conversions%s
+D s-assert.ads		20170516105954 cd8d2c94 system.assertions%s
+D s-atocou.ads		20170516105956 b45c2d8d system.atomic_counters%s
+D s-conca3.ads		20170516105955 0b705ca5 system.concat_3%s
+D s-exctab.ads		20170516105954 54135002 system.exception_table%s
+D s-finmas.ads		20170516105954 7811a767 system.finalization_masters%s
+D s-finroo.ads		20170516105954 4ff27390 system.finalization_root%s
+D s-multip.ads		20170516105948 38ac9f73 system.multiprocessors%s
+D s-oscons.ads		20170516200647 bc09da3b system.os_constants%s
+D s-osinte.ads		20170516105954 8eb5b5b4 system.os_interface%s
+D s-parame.ads		20170516105955 7e2a0d7f system.parameters%s
+D s-pooglo.ads		20170516105948 ede33ef8 system.pool_global%s
+D s-secsta.ads		20170516105955 9751b57e system.secondary_stack%s
+D s-soflin.ads		20170516105951 14e1eb6c system.soft_links%s
+D s-stache.ads		20170516105955 a37c21ec system.stack_checking%s
+D s-stausa.ads		20170516105954 017a0a05 system.stack_usage%s
+D s-stalib.ads		20170516105955 09bd3940 system.standard_library%s
+D s-stoele.ads		20170516105956 2dc34a04 system.storage_elements%s
+D s-stoele.adb		20170516105954 ed88f8fb system.storage_elements%b
+D s-stopoo.ads		20170516105951 b16154c2 system.storage_pools%s
+D s-stposu.ads		20170516105949 97a6219c system.storage_pools.subpools%s
+D s-stratt.ads		20170516105949 aedef97e system.stream_attributes%s
+D s-tasinf.ads		20170516105952 801abd01 system.task_info%s
+D s-taspri.ads		20170516105950 f40ac08d system.task_primitives%s
+D s-taprop.ads		20170516105950 1dd2e1b6 system.task_primitives.operations%s
+D s-taskin.ads		20170516105956 05d6152c system.tasking%s
+D s-taprob.ads		20170516105950 acd6094d system.tasking.protected_objects%s
+D s-tpoben.ads		20170516105956 60ad3dae system.tasking.protected_objects.entries%s
+D s-tassta.ads		20170516105952 5a53a7c6 system.tasking.stages%s
+D s-traent.ads		20170516105950 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20170516105953 34867c83 system.unsigned_types%s
+X 9 a-coinve.ads
+57R9*Vector<12|43R9>
+X 13 a-iteint.ads
+24h9 Forward_Iterator
+32h9 Reversible_Iterator<24R9[9|75]>
+X 26 cac.ads
+31K9*CAC 34e8 30|1r6 1r21
+X 27 cac-trace.ads
+39K13*Trace 215e14 30|1w10 1r25
+127V13*Here=128:43{string} 30|15s19 28s19 33s19 42s19 48s19 53s19 58s19 59s19
+. 62s19 65s6 67s6 69s6 72s6 74s19 78s34
+152U14*Log 30|65s1 67s1 69s1 72s1
+160U14*Log 30|15s7 28s7 33s7 42s7 48s7 53s7 58s7 59s7 62s7 74s7
+198U14*Trace_Exception 30|78s10
+212V13*Who=213:43{string} 30|15s25 28s25 33s25 42s25 48s25 53s25 58s25 59s25
+. 62s25 65s12 67s12 69s12 72s12 74s25
+X 28 framework.ads
+9K9*Framework 65e14 29|6r9 8r26 23r43 33r5 30|5r14 10r43 83r5
+16R9*View_Type<41|205R9> 49e14 29|8r36 23r53 30|10r53
+19b4*Debug{boolean} 30|15r12 28r12 33r12 42r12 48r12 53r12 58r12 59r12 62r12
+. 74r12
+48p7*Window(37|51R9) 30|30m12
+X 29 framework-docker_view.ads
+6K19*Docker_View 28|9k9 29|33l15 33e26 30|5b24 83l15 83t26
+8R9*View_Type<28|16R9> 19e14 21p14 22r43 28P14 29r43 30|9r43 22r43 37|67P14
+. 76p14 101p14 112p14 121p14 139p14 140p13 145p14 146p13 153p13 156p13 158p14
+. 165p13 169p13 170p14 177p13 181p13 185p13 191p13 193p14 195p14 204p14 205p13
+. 215p13 216p14 222p14 225p13 228p14 231p13 236p14 239p13 242p14 245p13 254p14
+. 257p14 262p14 267p14 268p13 347p14 349p14 352p14 354p14 359p14 361p14 364p14
+. 366p14 369p14 371p14 373p14 375p14 377p14 379p14 381p14 383p14 385p14 387p14
+. 392p14 394p14 396p14 398p14 400p14 402p14 409p14 411p14 414p14 416p14 420p14
+. 422p14 425p14 427p14 431p14 433p14 436p14 438p14 442p14 444p14 447p14 449p14
+. 452p14 454p14 457p14 459p14 462p14 464p14 468p14 470p14 474p14 476p14 482p14
+. 486p14 491p14 493p14 495p14 497p14 499p14 501p14 503p14 505p14 507p14 510p14
+. 519p14 521p14 524p14 526p14 529p14 531p14 534p14 536p14 539p14 541p14 546p14
+. 548p14 550p14 552p14 554p14 556p14 560p14 562p14 566p14 568p14 575p14 577p14
+. 580p14 582p14 585p14 587p14 604p14 607p14 611p14 619p14 624p14 636p14 654p14
+. 659p14 663p14 666p14 674p13 678p13 681p14 682p13 683p13 685p13 39|80p14
+. 102p14 116p14 117p13 129p14 130p13 133p14 134p13 139p14 141p13 145p14 147p13
+. 152p14 153p13 160p13 170p14 171p13 173p14 174p13 176p14 178p13 182p14 183p13
+. 188p14 190p13 195p14 197p13 203p14 205p13 214p14 216p13 242p14 249p14 256p14
+. 258p13 262p14 264p14 271p14 273p13 279p14 281p13 296p14 302p14 304p13 309p14
+. 315p14 322p14 329p13 330p13 333p13 334p13 337p14 340p14 342p13 344p14 347p14
+. 349p13 351p14 354p14 356p13 358p14 361p14 363p13 365p14 368p14 370p13 373p14
+. 376p14 378p13 381p14 384p14 386p13 388p14 391p14 393p13 395p14 398p14 400p13
+. 402p14 405p14 407p13 416p14 417p13 420p14 421p13 424p13 427p13 430p13 433p13
+. 437p13 442p13 447p13 451p13 455p13 459p13 463p13 466p13 469p13 473p13 477p14
+. 478p13 482p14 483p13 491p14 492p14 494p14 496p13 498p14 500p13 506p14 509p13
+. 512p14 514p14 516p14 519p13 522p14 524p13 527p14 529p13 532p14 534p13 538p14
+. 540p13 543p14 545p13 548p14 550p13 557p14 565p14 570p14 579p14 584p14 589p14
+. 591p13 613p14 619p14 625p14 632p14 633p13 643p14 646p14 649p13 650p13 653p14
+. 656p13 661p14 666p14 673p13 681p14 684p14 687p14 691p14 697p14 700p14 703p14
+. 706p14 709p14 41|60P14 71p14 79p14 88p14 96p14 99p14 102p14 111p14 118p14
+. 128p14 133p14 139p14 149p13 160p13 176p13 181p13 191P14 59|42p14
+9r7*Cards{42|51R9} 30|16m12 49m12 50m12 51m33 55m42 64m12 66m12
+10r7*Deck{43|49R9} 30|44m12 46m35 49m31 51m12 54m43
+13r7*Docker{43|49R9} 30|32m12 35m31 39m12 40m12 44m30 46m12
+17r7*Panel{41|205R9} 30|35m12 36m12 37m12 39m34 40m34 73m12
+18r7*Tabs{42|108R9} 30|17m12 54m12 68m12 70m12
+21U14*Add_Card 22=7 23^7 24>7 30|8b14 18l8 18t16
+22r7 View{8R9} 30|9b7 16m7 16r7 17m7 17r7
+23p7 Card(28|16R9) 25r16 30|10b7 16r34
+24a7 Name{string} 30|11b7 15r50 16r28 17r26 17r32
+28U14*Create<41|213p14> 29=7 30=7 31>7 30|21b14 81l8 81t14
+29r7 View{8R9} 30|22b7 29m33 29r33 30m7 32m7 32r7 35m7 35r7 35m26 35r26 36m7
+. 36r7 37m7 37r7 39m7 39r7 39m29 39r29 40m7 40r7 40m29 40r29 44m7 44r7 44m25
+. 44r25 46m7 46r7 46m30 46r30 49m7 49r7 49m26 49r26 50m7 50r7 51m7 51r7 51m28
+. 51r28 54m7 54r7 54m38 54r38 55m37 55r37 64m7 64r7 66m7 66r7 68m7 68r7 70m7
+. 70r7 73m7 73r7
+30c7 Parent<37|51R9> 30|23b7 29m47 30m22 30r22 32m27
+31a7 ID{string} 30|24b7 29r55
+X 30 framework-docker_view.adb
+77r12 Fault{11|63R9} 78r27
+X 33 gnoga.ads
+40K9*Gnoga 29|1r6 2r6 3r6 9r35 10r35 13r27 17r35 18r35 30r43 30|2r6 23r43
+. 29r7 64r28 68r27 33|82e10
+X 36 gnoga-gui.ads
+38K15*Gui 29|1r12 2r12 3r12 9r41 10r41 13r33 17r41 18r41 30r49 30|2r12 23r49
+. 29r13 64r34 68r33 36|39e14
+X 37 gnoga-gui-base.ads
+45K19*Base 29|2w16 30r53 30|23r53 37|760e19
+51R9*Base_Type<12|50R9> 29|30r58 30|23r58 37|759e17
+53P9*Pointer_To_Base_Class(51R9)
+67U14*Initialize<12|53p14>
+76U14*Free
+101U14*Create_With_Script
+112U14*Attach_Using_Parent
+121U14*Attach
+139U14*Height
+140V13*Height{integer}
+145U14*Width
+146V13*Width{integer}
+153V13*Unique_ID{47|73I12}
+156V13*Connection_ID{47|69I12}
+158U14*Connection_ID
+165V13*Valid{boolean}
+169V13*ID{string}
+170U14*ID
+177V13*ID_Type{47|67E9}
+181V13*DOM_Selector{string}
+185V13*Connection_Data{47|79P9}
+191V13*Parent{53P9}
+193U14*Parent
+195U14*Parent
+204U14*Dynamic
+205V13*Dynamic{boolean}
+215V13*Buffer_Connection{boolean}
+216U14*Buffer_Connection
+222U14*Property
+225V13*Property{string}
+228U14*Property
+231V13*Property{integer}
+236U14*Property
+239V13*Property{float}
+242U14*Property
+245V13*Property{boolean}
+254U14*Focus
+257U14*Blur
+262U14*Flush_Buffer
+267U14*Execute
+268V13*Execute{string}
+347U14*On_Resize_Handler
+349U14*Fire_On_Resize
+352U14*On_Scroll_Handler
+354U14*Fire_On_Scroll
+359U14*On_Focus_Handler
+361U14*Fire_On_Focus
+364U14*On_Blur_Handler
+366U14*Fire_On_Blur
+369U14*On_Change_Handler
+371U14*Fire_On_Change
+373U14*On_Focus_In_Handler
+375U14*Fire_On_Focus_In
+377U14*On_Focus_Out_Handler
+379U14*Fire_On_Focus_Out
+381U14*On_Input_Handler
+383U14*Fire_On_Input
+385U14*On_Reset_Handler
+387U14*Fire_On_Reset
+392U14*On_Search_Handler
+394U14*Fire_On_Search
+396U14*On_Select_Handler
+398U14*Fire_On_Select
+400U14*On_Submit_Handler
+402U14*Fire_On_Submit
+409U14*On_Click_Handler
+411U14*Fire_On_Click
+414U14*On_Mouse_Click_Handler
+416U14*Fire_On_Mouse_Click
+420U14*On_Context_Menu_Handler
+422U14*Fire_On_Context_Menu
+425U14*On_Mouse_Right_Click_Handler
+427U14*Fire_On_Mouse_Right_Click
+431U14*On_Double_Click_Handler
+433U14*Fire_On_Double_Click
+436U14*On_Mouse_Double_Click_Handler
+438U14*Fire_On_Mouse_Double_Click
+442U14*On_Mouse_Enter_Handler
+444U14*Fire_On_Mouse_Enter
+447U14*On_Mouse_Leave_Handler
+449U14*Fire_On_Mouse_Leave
+452U14*On_Mouse_Over_Handler
+454U14*Fire_On_Mouse_Over
+457U14*On_Mouse_Out_Handler
+459U14*Fire_On_Mouse_Out
+462U14*On_Mouse_Down_Handler
+464U14*Fire_On_Mouse_Down
+468U14*On_Mouse_Up_Handler
+470U14*Fire_On_Mouse_Up
+474U14*On_Mouse_Move_Handler
+476U14*Fire_On_Mouse_Move
+482U14*On_Drag_Start_Handler
+486U14*Fire_On_Drag_Start
+491U14*On_Drag_Handler
+493U14*Fire_On_Drag
+495U14*On_Drag_End_Handler
+497U14*Fire_On_Drag_End
+499U14*On_Drag_Enter_Handler
+501U14*Fire_On_Drag_Enter
+503U14*On_Drag_Leave_Handler
+505U14*Fire_On_Drag_Leave
+507U14*On_Drop_Handler
+510U14*Fire_On_Drop
+519U14*On_Character_Handler
+521U14*Fire_On_Character
+524U14*On_Wide_Character_Handler
+526U14*Fire_On_Wide_Character
+529U14*On_Key_Down_Handler
+531U14*Fire_On_Key_Down
+534U14*On_Key_Up_Handler
+536U14*Fire_On_Key_Up
+539U14*On_Key_Press_Handler
+541U14*Fire_On_Key_Press
+546U14*On_Copy_Handler
+548U14*Fire_On_Copy
+550U14*On_Cut_Handler
+552U14*Fire_On_Cut
+554U14*On_Paste_Handler
+556U14*Fire_On_Paste
+560U14*On_Create_Handler
+562U14*Fire_On_Create
+566U14*On_Destroy_Handler
+568U14*Fire_On_Destroy
+575U14*On_Child_Added_Handler
+577U14*Fire_On_Child_Added
+580U14*On_Child_Removed_Handler
+582U14*Fire_On_Child_Removed
+585U14*On_Message_Handler
+587U14*Fire_On_Message
+604U14*On_Resize
+607U14*On_Create
+611U14*On_Destroy
+619U14*On_Child_Removed
+624U14*On_Message
+636U14*Bind_Event
+654U14*Bind_Event_Script
+659U14*Unbind_Event
+663U14*Attach_To_Message_Queue
+666U14*Detach_From_Message_Queue
+674V13*Script_Accessor{string}
+678V13*jQuery{string}
+681U14*jQuery_Execute
+682V13*jQuery_Execute{string}
+683V13*jQuery_Execute{integer}
+685V13*jQuery_Execute{float}
+X 39 gnoga-gui-element.ads
+46K19*Element 30|2w16 64r38 68r37 39|718e22
+53P9*Pointer_To_Element_Class(51R9)
+80U14*Create_From_HTML
+102U14*Create_XML_Element
+116U14*Access_Key
+117V13*Access_Key{string}
+129U14*Advisory_Title
+130V13*Advisory_Title{string}
+133U14*Class_Name
+134V13*Class_Name{string}
+139U14*Editable
+141V13*Editable{boolean}
+145U14*Draggable
+147V13*Draggable{boolean}
+152U14*Inner_HTML
+153V13*Inner_HTML{string}
+160V13*Outer_HTML{string}
+170U14*Language_Code
+171V13*Language_Code{string}
+173U14*Tab_Index
+174V13*Tab_Index{natural}
+176U14*Spell_Check
+178V13*Spell_Check{boolean}
+182U14*Text
+183V13*Text{string}
+188U14*Text_Direction
+190V13*Text_Direction{186E9}
+195U14*Hidden
+197V13*Hidden{boolean}
+203U14*Visible 30|36s18 73s18
+205V13*Visible{boolean}
+214U14*Display
+216V13*Display{string}
+242U14*Clear_Side
+249U14*Layout_Float
+256U14*Overflow
+258V13*Overflow{254E9}
+262U14*Overflow_X
+264U14*Overflow_Y
+271U14*Resizable
+273V13*Resizable{269E9}
+277n35*Absolute{277E9} 30|64r46 68r45
+279U14*Position 30|64s18 68s17
+281V13*Position{277E9}
+296U14*Vertical_Align
+302U14*Box_Sizing
+304V13*Box_Sizing{300E9}
+309U14*Z_Index
+315U14*Margin
+322U14*Padding
+329V13*Position_Top{integer}
+330V13*Position_Left{integer}
+333V13*Offset_From_Top{integer}
+334V13*Offset_From_Left{integer}
+337U14*Left
+340U14*Left
+342V13*Left{string}
+344U14*Right
+347U14*Right
+349V13*Right{string}
+351U14*Top 30|66s18 70s17
+354U14*Top
+356V13*Top{string}
+358U14*Bottom
+361U14*Bottom
+363V13*Bottom{string}
+365U14*Box_Height
+368U14*Box_Height
+370V13*Box_Height{string}
+373U14*Box_Width
+376U14*Box_Width
+378V13*Box_Width{string}
+381U14*Minimum_Height
+384U14*Minimum_Height
+386V13*Minimum_Height{string}
+388U14*Maximum_Height
+391U14*Maximum_Height
+393V13*Maximum_Height{string}
+395U14*Minimum_Width
+398U14*Minimum_Width
+400V13*Minimum_Width{string}
+402U14*Maximum_Width
+405U14*Maximum_Width
+407V13*Maximum_Width{string}
+416U14*Inner_Height
+417V13*Inner_Height{integer}
+420U14*Inner_Width
+421V13*Inner_Width{integer}
+424V13*Outer_Height{integer}
+427V13*Outer_Width{integer}
+430V13*Outer_Height_To_Margin{integer}
+433V13*Outer_Width_To_Margin{integer}
+437V13*Client_Width{natural}
+442V13*Client_Height{natural}
+447V13*Client_Left{natural}
+451V13*Client_Top{natural}
+455V13*Offset_Width{integer}
+459V13*Offset_Height{integer}
+463V13*Offset_Left{integer}
+466V13*Offset_Top{integer}
+469V13*Scroll_Width{natural}
+473V13*Scroll_Height{natural}
+477U14*Scroll_Left
+478V13*Scroll_Left{integer}
+482U14*Scroll_Top
+483V13*Scroll_Top{integer}
+491U14*Color
+492U14*Color
+494U14*Color
+496V13*Color{47|88R9}
+498U14*Opacity
+500V13*Opacity{47|84O12}
+506U14*Background_Attachment
+509V13*Background_Attachment{504E9}
+512U14*Background_Color 30|37s18
+514U14*Background_Color
+516U14*Background_Color
+519V13*Background_Color{47|88R9}
+522U14*Background_Image
+524V13*Background_Image{string}
+527U14*Background_Position
+529V13*Background_Position{string}
+532U14*Background_Origin
+534V13*Background_Origin{string}
+538U14*Background_Repeat
+540V13*Background_Repeat{string}
+543U14*Background_Clip
+545V13*Background_Clip{string}
+548U14*Background_Size
+550V13*Background_Size{string}
+557U14*Border 30|50s18
+565U14*Border_Radius
+570U14*Shadow
+579U14*Shadow_None
+584U14*Outline
+589U14*Cursor
+591V13*Cursor{string}
+613U14*Font
+619U14*Font
+625U14*Text_Alignment
+632U14*Auto_Place
+633V13*Auto_Place{boolean}
+643U14*Style
+646U14*Style
+649V13*Style{string}
+650V13*Style{integer}
+653U14*Attribute
+656V13*Attribute{string}
+661U14*First_Child
+666U14*Next_Sibling
+673V13*HTML_Tag{string}
+681U14*Click
+684U14*Add_Class
+687U14*Remove_Class
+691U14*Toggle_Class
+697U14*Place_Inside_Top_Of
+700U14*Place_Inside_Bottom_Of
+703U14*Place_Before
+706U14*Place_After
+709U14*Remove
+X 41 gnoga-gui-view.ads
+46K19*View 29|1r16 3r16 9r45 10r45 13r37 17r45 18r45 30|29r17 41|228e19
+60U14*Finalize<37|71p14>
+71U14*Fill_Parent
+79U14*Put_Line
+88U14*Put
+96U14*New_Line
+99U14*Horizontal_Rule
+102U14*Put_HTML
+111U14*Load_File
+118U14*Load_HTML
+128U14*Load_CSS
+133U14*Load_CSS_File
+139U14*Add_Element
+149V13*New_Element{39|53P9}
+160V13*Add{39|53P9}
+176V13*Element{39|53P9}
+181V13*Element_Names{47|48R12}
+191U14*On_Child_Added<37|615p14>
+205R9*View_Type<52R9> 29|17r50 30|29r22 41|227e57
+213U14*Create 30|29s39 35s18
+216a7 ID{string} 30|35r39
+X 42 gnoga-gui-view-card.ads
+45K24*Card 29|3w21 9r50 18r50 42|195e24
+51R9*Card_View_Type<41|205R9> 29|9r55 42|182e57
+60U14*Create<41|213p14> 30|49s18
+63a7 ID{string} 30|49r37
+81U14*Add_Card 30|16s18
+84b24 Show{boolean} 30|16r40
+108R9*Tab_Type<41|52R9> 29|18r55 42|189e17
+117U14*Create 30|54s17
+119c7 Parent<37|51R9> 30|54r25
+120c7 Card_View<51R9> 30|55r24
+127a7 ID{string} 30|56r24
+133U14*Add_Tab 30|17s17
+136b23 Selected{boolean} 30|17r38
+X 43 gnoga-gui-view-docker.ads
+43K24*Docker 29|1w21 10r50 13r42 43|123e26
+49R9*Docker_View_Type<41|205R9> 29|10r57 13r49 43|122e59
+58U14*Create<41|213p14> 30|32s19 44s17
+61a7 ID{string} 30|32r35 44r38
+86U14*Top_Dock 30|39s19 40s19
+96U14*Fill_Dock 30|46s19 51s17
+X 47 gnoga-types.ads
+48R12*Data_Array_Type{9|57R9[46]}
+69I12*Connection_ID{integer}
+73I12*Unique_ID{integer}
+79P9*Pointer_to_Connection_Data_Class(77R9)
+82O9*Frational_Range_Type
+84O12*Alpha_Type{82O9}
+X 59 s-finroo.ads
+42U14*Adjust
+X 68 s-stausa.ads
+203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
+268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
+

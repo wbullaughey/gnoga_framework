@@ -1,0 +1,29 @@
+V "GNAT Lib v2017"
+A -gnatA
+A -fstack-check=specific
+A -g
+A -gnat12
+A -gnata
+A -gnatf
+A -gnato
+A -gnatVa
+A -gnatwa
+A -gnatwl
+A -gnatVa
+A -gnat2012
+A -mmacosx-version-min=10.13.7
+A -mtune=core2
+A -fPIC
+A -feliminate-unused-debug-symbols
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U types%s		types.ads		a53ee5bd NE OO PK
+
+D system.ads		20170516105953 085b6ffb system%s
+D types.ads		20180924225002 a53ee5bd types%s
+X 2 types.ads
+3K9*Types 8l5 8e10
+

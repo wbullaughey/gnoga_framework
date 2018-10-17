@@ -9,7 +9,7 @@ package body Main_Suite is
       Tests : constant Access_Test_Suite := new Test_Suite;
    begin
       if Do_Main_Tests then
-         Tests.Add_Test (Dictionary_Caller.Create ("Test create store load data dictionary",
+         Tests.Add_Test (Dictionary_Caller.Create ("Test Main Window",
             Main_Tests.Test_Main'Access));
       end if;
 
