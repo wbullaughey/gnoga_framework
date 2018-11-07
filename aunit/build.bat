@@ -8,6 +8,6 @@ set USER=wayne
 echo PROJECT=%PROJECT%
 echo GPR_DIRECTORY=%PROJECT_DIRECTORY%
 rem Taskkill /IM db_view.exe /F
-gprbuild -p -P %PROJECT% -aP..\lib -aP"%GPR_DIRECTORY%" -j10 -d
+gprbuild -p -P %PROJECT% -aP..\lib -aP..\main -aP"%GPR_DIRECTORY%" -j10 -d
 
 
