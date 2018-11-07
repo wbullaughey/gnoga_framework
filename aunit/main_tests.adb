@@ -1,18 +1,19 @@
 with Ada.Calendar;
---with Ada.Exceptions;
---with Ada.Text_IO;use Ada.Text_IO;
 with Aunit.Assertions; use Aunit.Assertions;
 with CAC.Trace.Tasks; use CAC.Trace;
 with CAC.Unit_Test.Setup;
---with Framework;
-with Gnoga.Types;
-
---with AUnit.Assertions; use AUnit.Assertions;
+with Gnoga.Gui.Element;
+with options;
 
 package body Main_Tests is
 
    use type Ada.Calendar.Time;
-   use type Gnoga.Types.Pointer_to_Connection_Data_Class;
+
+   procedure Create_Handler (
+      Object                     : in out Gnoga.Gui.Base.Base_Type'Class);
+
+   procedure Ok_Handler (
+      Object                     : in out Gnoga.Gui.Base.Base_Type'Class);
 
    Connection_ID                 : constant String := "root";
 
@@ -31,7 +32,12 @@ package body Main_Tests is
                                     Connection_Class_Access (Framework.Get_Connection (Connection_ID));
 
       begin
-         Connection_Data.Test.View.Create (Main_Window);
+         Main_Window.Connection_Data (Connection_Data);
+         Connection_Data.Form.Create (Main_Window);
+         Connection_Data.Ok_Button.On_Create_Handler (Create_Handler'Unrestricted_Access);
+         Connection_Data.Ok_Button.Create (Connection_Data.Form, "OK", "Ok", "Ok");
+         Connection_Data.Ok_Button.On_Click_Handler (Ok_Handler'Unrestricted_Access);
+
          Connection_Data.Test.Created := True;
          Connection_Data.Connection_Handler (Main_Window);
       end;
@@ -40,13 +46,39 @@ package body Main_Tests is
    end Connection_Handler;
 
    ---------------------------------------------------------------
+   procedure Create_Handler (
+      Object                     : in out Gnoga.Gui.Base.Base_Type'Class) is
+   ---------------------------------------------------------------
+
+      Connection_Data            : constant Connection_Class_Access :=
+                                    Connection_Class_Access (Framework.Get_Connection (Connection_ID));
+   begin
+      Log (Debug, Here, Who & " enter");
+      Connection_Data.Object := Object'unchecked_access;
+   end Create_Handler;
+
+   ---------------------------------------------------------------
+   procedure Ok_Handler (
+      Object                     : in out Gnoga.Gui.Base.Base_Type'Class) is
+   ---------------------------------------------------------------
+
+      Connection_Data            : constant Connection_Class_Access :=
+                                    Connection_Class_Access (Object.Connection_Data);
+
+   begin
+      Log (Debug, Here, Who & " enter");
+      Connection_Data.Ok_Button.Disabled;
+      Connection_Data.Ok_Pressed := True;
+      Log (Debug, Here, Who & " exit");
+   end Ok_Handler;
+
+   ---------------------------------------------------------------
    procedure Set_Up (T : in out Test_Type) is
    ---------------------------------------------------------------
    begin
       Log (Debug, Here, Who & " enter");
       T.Connection.Test := T'unchecked_access;
-      Framework.Create (T.Connection'unchecked_access, Connection_ID, T.View'unchecked_access,
-         Connection_Handler'access, "main test title");
+      T.Connection.Initialize (Connection_ID, Connection_Handler'access, "main test title");
       Log (Debug, Here, Who & " exit");
 
    exception
@@ -70,19 +102,42 @@ package body Main_Tests is
       T                          : in out Test_Type) is
    ---------------------------------------------------------------
 
-      Timeout                    : constant Ada.Calendar.Time := Ada.Calendar.Clock + 2.0;
-
    begin
       Log (Debug, Here, Who & " enter");
       T.Connection.Run;
-      while Ada.Calendar.Clock < Timeout loop
-         if T.Created then
-            Log (Debug, Here, Who & " exit succeed");
-            return;
-         end if;
-         delay 0.1;
-      end loop;
+
+      if Options.Pause then
+log (here, who);
+         Pause ("before waiting for exit");
+log (here, who);
+      end if;
+
+      declare
+         Mouse_Clicked           : Boolean := False;
+         Timeout                 : constant Ada.Calendar.Time := Ada.Calendar.Clock + 2.0;
+
+      begin
+         while Ada.Calendar.Clock < Timeout loop
+log (here, who);
+            if T.Created then
+log (here, who);
+               if not Mouse_Clicked and not Options.Pause then
+                  Mouse_Clicked := True;
+                  Log (Debug, Here, Who & " simulate mouse click");
+                  Ok_Handler (T.Connection.Object.all);
+               end if;
+
+               if T.Connection.OK_Pressed then
+                  Log (Debug, Here, Who & " exit succeed");
+                  return;
+               end if;
+            end if;
+            delay 0.1;
+         end loop;
+      end;
+
       Assert (False, "Created should be set");
+      Assert (False, "Ok should have been pressed");
       Log (Debug, Here, Who & " exit failure");
    end Test_Main;
 

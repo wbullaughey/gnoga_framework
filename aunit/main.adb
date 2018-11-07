@@ -11,12 +11,18 @@ with CAC.Unit_Test.Expression_Filter;
 with CAC.OS;
 with CAC.Trace.Tasks; use CAC.Trace;
 with Command_Line_Iterator;
+with Dock;
+with Docker_Suite;
+with Docker_Tests;
 with Framework;
 with GNOGA;
 with Main_Suite;
 with Main_Tests;
-with Top_Window_Suite;
-with Top_Window_Tests;
+with Options;
+with Table;
+--with Top_Window;
+--with Top_Window_Suite;
+--with Top_Window_Tests;
 
 procedure Main is
 
@@ -47,8 +53,9 @@ procedure Main is
 
    end Interrupt_Handler;
 
+   procedure Docker_Suite_Runner is new AUnit.Run.Test_Runner (Docker_Suite.Suite);
    procedure Main_Suite_Runner is new AUnit.Run.Test_Runner (Main_Suite.Suite);
-   procedure Top_Window_Suite_Runner is new AUnit.Run.Test_Runner (Top_Window_Suite.Suite);
+-- procedure Top_Window_Suite_Runner is new AUnit.Run.Test_Runner (Top_Window_Suite.Suite);
 
    ----------------------------------------------------------------------------
    procedure Help is
@@ -59,6 +66,7 @@ procedure Main is
       Put_Line ("   -e <expression>    filter expression");
       Put_Line ("   -h                 this message");
       Put_Line ("   -i                 interactive mode");
+      Put_Line ("   -m                 manual test");
       Put_Line ("   -p                 enable debug pause");
       Put_Line ("   -s <test suite>    select test suite to run");
       Put_Line ("   -S <test suite>    inhibit test suite to run");
@@ -66,11 +74,15 @@ procedure Main is
       Put_Line ("   -T <trace output option>  select trace option to change default");
       Put_Line ("trace options:");
       Put_Line ("   -a                 all");
+      Put_Line ("   -d                 dock");
       Put_Line ("   -f                 framework");
       Put_Line ("   -g                 gnoga");
-      Put_Line ("   -t                 test");
+      Put_Line ("   -t                 table");
+      Put_Line ("   -w                 top window");
       New_Line;
       Put_Line ("  <test suite>");
+      Put_Line ("   c                  CAC.Trace");
+      Put_Line ("   d                  docker");
       Put_Line ("   m                  main");
       Put_Line ("   t                  top window");
 
@@ -78,6 +90,7 @@ procedure Main is
    end Help;
 
    Break_Handler                 : aliased Interrupt_Handler.Handler_Type;
+   Do_Docker_Suite               : boolean := True;
    Do_Main_Suite                 : boolean := True;
    Do_Top_Window_Suite           : boolean := True;
    Filter                        : aliased CAC.Unit_Test.Expression_Filter.Filter_Type;
@@ -116,10 +129,17 @@ begin
                   when 'h' =>
                      Help;
 
-                  when 'i' =>
-                     Top_Window_Tests.Interactive := True;
+------                when 'i' =>
+------                   Top_Window_Tests.Interactive := True;
+
+                  when 'm' =>
+                     Standard.Options.Manual := True;
+
+                  when 'p' =>
+                     Standard.Options.Pause := True;
 
                   when 's' =>    -- suites to include
+                     Do_Docker_Suite := False;
                      Do_Main_Suite := False;
                      Do_Top_Window_Suite := False;
 
@@ -129,6 +149,9 @@ begin
 
                      begin
                         case Suite is
+
+                           when 'd' =>
+                              Do_Docker_Suite := True;
 
                            when 'm' =>
                               Do_Main_Suite := True;
@@ -150,6 +173,9 @@ begin
 
                      begin
                         case Suite is
+
+                           when 'd' =>
+                              Do_Docker_Suite := False;
 
                            when 'm' =>
                               Do_Main_Suite := False;
@@ -177,10 +203,20 @@ begin
                               case Trace is
 
                                  when 'a' =>
+                                    CAC.Trace.CAC_Lib_Debug := True;
+                                    Dock.Debug := True;
+                                    Docker_Tests.Debug := True;
                                     Framework.Debug := True;
                                     GNOGA.Debug := True;
                                     Main_Tests.Debug := True;
-                                    Top_Window_Tests.Debug := True;
+                                    Table.Debug := True;
+
+                                 when 'c' =>
+                                    CAC.Trace.CAC_Lib_Debug := True;
+
+                                 when 'd' =>
+                                    Dock.Debug := True;
+                                    Docker_Tests.Debug := True;
 
                                  when 'f' =>
                                     Framework.Debug := True;
@@ -192,7 +228,10 @@ begin
                                     Main_Tests.Debug := True;
 
                                  when 't' =>
-                                    Top_Window_Tests.Debug := True;
+                                    Table.Debug := True;
+
+--                               when 'w' =>
+--                                  Top_Window.Debug := True;
 
                                  when Others =>
                                     Put_Line ("invalid option '" & Option & "'");
@@ -256,6 +295,12 @@ begin
 
       end loop;
 
+      if Do_Docker_Suite then
+         Log (Framework.Debug, Here, Who & " start docker suite");
+         Docker_Suite_Runner (Reporter, Options);
+         Log (Framework.Debug, Here, Who & " end docker suite");
+      end if;
+
       if Do_Main_Suite then
          Log (Framework.Debug, Here, Who & " start main suite");
          Main_Suite_Runner (Reporter, Options);
@@ -264,7 +309,7 @@ begin
 
       if Do_Top_Window_Suite then
          Log (Framework.Debug, Here, Who & " start Top_Window suite");
-         Top_Window_Suite_Runner (Reporter, Options);
+--       Top_Window_Suite_Runner (Reporter, Options);
          Log (Framework.Debug, Here, Who & " end Top_Window suite");
       end if;
 

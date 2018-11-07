@@ -10,13 +10,13 @@ with "main_lib";
 
 project Main is
    for Languages use ("Ada");
-   for Exec_Dir use Base.Project_Directory;
+   for Exec_Dir use "bin";
    for Main use ("main.adb");
    for Object_Dir use Root.Object_Directory;
 
 
    package Compiler renames Root.Compiler;
    package Builder is
-      for Executable ("main.adb") use "bin/gnoga_aunit";
+      for Executable ("main.adb") use "gnoga_aunit";
    end Builder;
 end Main;

@@ -71,7 +71,7 @@
             Filters=""
             GUID="{7E3D1416-5C04-4EDB-ABC1-3C426C1DB37A}">
             <F
-                N="../../../vendor/new_gnoga-edited/src/*.ad*"
+                N="../../../vendor/gnoga-code/src/*.ad*"
                 Recurse="0"
                 Excludes=".git/"/>
         </Folder>

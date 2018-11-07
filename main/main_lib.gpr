@@ -13,9 +13,12 @@ library project Main_Lib is
    for Library_Dir use Root.Library_Directory;
    for Source_Dirs use (".");
    for Source_Files use (
-      "Top_Window.adb",
-      "Top_Window.ads"
-   );
+      "Dock.ads",
+      "Dock.adb",
+      "Main_Lib.ads",
+      "Main_Lib.adb",
+      "Table.ads",
+      "Table.adb");
 
    package Compiler renames Root.Compiler;
 
