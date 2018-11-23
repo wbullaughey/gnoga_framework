@@ -132,7 +132,9 @@ log (here, who);
          end loop;
       end;
 
+log (here, who);
       Assert (False, "Created should be set");
+log (here, who);
       Assert (False, "Ok should have been pressed");
       Log (Debug, Here, Who & " exit failure");
 
