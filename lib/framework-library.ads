@@ -1,4 +1,4 @@
-package Main_Lib is
+package Framework.Library is
 
    Failed                        : exception;
 
@@ -18,4 +18,4 @@ package Main_Lib is
       Occured                    : Boolean := False;
    end Signal_Type;
 
-end Main_Lib;
+end Framework.Library;

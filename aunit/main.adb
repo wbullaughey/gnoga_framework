@@ -11,15 +11,15 @@ with CAC.Unit_Test.Expression_Filter;
 with CAC.OS;
 with CAC.Trace.Tasks; use CAC.Trace;
 with Command_Line_Iterator;
-with Dock;
 with Docker_Suite;
 with Docker_Tests;
-with Framework;
+with Framework.Dock;
+with Framework.Table;
 with GNOGA;
 with Main_Suite;
 with Main_Tests;
 with Options;
-with Table;
+--with Table;
 --with Top_Window;
 --with Top_Window_Suite;
 --with Top_Window_Tests;
@@ -65,7 +65,7 @@ procedure Main is
       Put_Line (Ada.Command_Line.Command_Name);
       Put_Line ("   -e <expression>    filter expression");
       Put_Line ("   -h                 this message");
-      Put_Line ("   -i                 interactive mode");
+--    Put_Line ("   -i                 interactive mode");
       Put_Line ("   -m                 manual test");
       Put_Line ("   -p                 enable debug pause");
       Put_Line ("   -s <test suite>    select test suite to run");
@@ -98,7 +98,7 @@ procedure Main is
                                     Command_Line_Iterator.Initialize (
                                        Include_Options         => True,
                                        Include_Non_Options     => True,
-                                       Options_With_Parameters => "esStT");
+                                       Options_With_Parameters => "esPStT");
 
    Options  : AUnit.Options.AUnit_Options;
    Reporter : AUnit.Reporter.Text.Text_Reporter;
@@ -137,6 +137,9 @@ begin
 
                   when 'p' =>
                      Standard.Options.Pause := True;
+
+                  when 'P' =>
+                     Standard.Options.Port := Iterator.Get_Number;
 
                   when 's' =>    -- suites to include
                      Do_Docker_Suite := False;
@@ -204,18 +207,18 @@ begin
 
                                  when 'a' =>
                                     CAC.Trace.CAC_Lib_Debug := True;
-                                    Dock.Debug := True;
+                                    Framework.Dock.Debug := True;
                                     Docker_Tests.Debug := True;
                                     Framework.Debug := True;
                                     GNOGA.Debug := True;
                                     Main_Tests.Debug := True;
-                                    Table.Debug := True;
+                                    Framework.Table.Debug := True;
 
                                  when 'c' =>
                                     CAC.Trace.CAC_Lib_Debug := True;
 
                                  when 'd' =>
-                                    Dock.Debug := True;
+                                    Framework.Dock.Debug := True;
                                     Docker_Tests.Debug := True;
 
                                  when 'f' =>
@@ -228,7 +231,7 @@ begin
                                     Main_Tests.Debug := True;
 
                                  when 't' =>
-                                    Table.Debug := True;
+                                    Framework.Table.Debug := True;
 
 --                               when 'w' =>
 --                                  Top_Window.Debug := True;

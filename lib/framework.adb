@@ -3,6 +3,7 @@ with Ada.Containers.Indefinite_Hashed_Maps;
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Unchecked_Deallocation;
 with CAC.Trace.Tasks; use CAC.Trace; -- use CAC.Trace.Tasks;
+with Gnoga.Application.Multi_Connect;
 with Strings;
 
 package body Framework is
@@ -12,7 +13,7 @@ package body Framework is
 
    package Connection_Table_Package is new Ada.Containers.Indefinite_Hashed_Maps (
       Key_Type       => String,
-      Element_Type   => Connection_Class_Access,
+      Element_Type   => Connection_Data_Class_Access,
       Hash           => Ada.Strings.Hash,
       Equivalent_Keys=> "=",
       "="            => "=");
@@ -21,7 +22,12 @@ package body Framework is
       Object         => Message_Loop_Task,
       Name           => Message_Loop_Task_Task_Access);
 
-   Connection_Table           : Connection_Table_Package.Map;
+   procedure On_Connect (
+      Main_Window                : in out Gnoga.Gui.Window.Window_Type'Class;
+      Connection                 : access Gnoga.Application.Multi_Connect.Connection_Holder_Type);
+
+   Connection_ID                 : constant String := "framework";
+   Connection_Table              : Connection_Table_Package.Map;
 
    ---------------------------------------------------------------
    procedure Connection_Handler (             -- handle new connection from browser
@@ -37,11 +43,11 @@ package body Framework is
    end Connection_Handler;
 
    ---------------------------------------------------------------
-   function Get_Connection (
-      Connection_ID           : in     String
+   function Get_Connection
+--    Connection_ID           : in     String
 -- ) return access Connection_Data_Type is
 -- ) return access Connection_Data_Type'class is
-   ) return Connection_Class_Access is
+   return Connection_Data_Class_Access is
    ---------------------------------------------------------------
 
    begin
@@ -57,9 +63,6 @@ package body Framework is
    ---------------------------------------------------------------
    procedure Initialize (
       Connection                 : in out Connection_Data_Type;
-      Connection_ID              : in     String;
-      Application_Connection_Handler
-                                 : in     Gnoga.Application.Multi_Connect.Application_Connect_Event;
       Title                      : in     String;
       HTTP_Port                  : in     Positive := 8080) is
    ---------------------------------------------------------------
@@ -76,9 +79,9 @@ package body Framework is
       Connection_Table.Insert (Connection_ID, Connection'unchecked_access);
 
       Standard.Gnoga.Application.Multi_Connect.Initialize (
-         Event=> Application_Connection_Handler,
-         Port => HTTP_Port,
-         Boot => "boot_jqueryui.html");
+         Event=> On_Connect'access,
+         Port => HTTP_Port);
+--       Boot => "boot_jqueryui.html");
 
       Connection.Message_Loop.Start (Connection'unchecked_access);
 
@@ -89,6 +92,21 @@ package body Framework is
 
       Log (Debug, Here, Who & " exit");
    end Initialize;
+
+   ----------------------------------------------------------------------------
+   procedure On_Connect (
+      Main_Window                : in out Gnoga.Gui.Window.Window_Type'Class;
+      Connection                 : access Gnoga.Application.Multi_Connect.Connection_Holder_Type) is
+   pragma Unreferenced (Connection);
+   ----------------------------------------------------------------------------
+
+      Connection_Data            : constant Connection_Data_Class_Access :=
+                                    Get_Connection;
+   begin
+      Log (Debug, Here, Who & " enter");
+      Connection_Data.Connection_Handler (Main_Window);
+      Log (Debug, Here, Who & " exit");
+   end On_Connect;
 
    ---------------------------------------------------------------
    procedure Run (
@@ -168,7 +186,7 @@ package body Framework is
 
    begin
       accept Start (
-         Connection_Pointer   : in     Connection_Class_Access) do
+         Connection_Pointer   : in     Connection_Data_Class_Access) do
 
          Connection := Connection_Pointer;
       end Start;

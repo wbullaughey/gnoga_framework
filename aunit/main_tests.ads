@@ -23,7 +23,7 @@ package Main_Tests is
       Test                       : access Test_Type;
    end record;
 
-   type Connection_Class_Access  is access all Connection_Data_Type'class;
+   type Connection_Data_Class_Access  is access all Connection_Data_Type'class;
 
    procedure Connection_Handler (             -- handle new connection from browser
       Main_Window                : in out Gnoga.Gui.Window.Window_Type'Class;

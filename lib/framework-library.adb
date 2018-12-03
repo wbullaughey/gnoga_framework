@@ -1,4 +1,4 @@
-package body Main_Lib is
+package body Framework.Library is
 
    protected body Signal_Type is
 
@@ -56,4 +56,4 @@ package body Main_Lib is
 
    end Signal_Type;
 
-end Main_Lib;
+end Framework.Library;

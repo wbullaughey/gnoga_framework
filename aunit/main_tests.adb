@@ -15,7 +15,7 @@ package body Main_Tests is
    procedure Ok_Handler (
       Object                     : in out Gnoga.Gui.Base.Base_Type'Class);
 
-   Connection_ID                 : constant String := "root";
+-- Connection_ID                 : constant String := "root";
 
    ---------------------------------------------------------------
    procedure Connection_Handler (             -- handle new connection from browser
@@ -28,8 +28,8 @@ package body Main_Tests is
       Log (Debug, Here, Who & " enter");
 
       declare
-         Connection_Data         : constant Connection_Class_Access :=
-                                    Connection_Class_Access (Framework.Get_Connection (Connection_ID));
+         Connection_Data         : constant Connection_Data_Class_Access :=
+                                    Connection_Data_Class_Access (Framework.Get_Connection);
 
       begin
          Main_Window.Connection_Data (Connection_Data);
@@ -50,8 +50,8 @@ package body Main_Tests is
       Object                     : in out Gnoga.Gui.Base.Base_Type'Class) is
    ---------------------------------------------------------------
 
-      Connection_Data            : constant Connection_Class_Access :=
-                                    Connection_Class_Access (Framework.Get_Connection (Connection_ID));
+      Connection_Data            : constant Connection_Data_Class_Access :=
+                                    Connection_Data_Class_Access (Framework.Get_Connection);
    begin
       Log (Debug, Here, Who & " enter");
       Connection_Data.Object := Object'unchecked_access;
@@ -62,8 +62,8 @@ package body Main_Tests is
       Object                     : in out Gnoga.Gui.Base.Base_Type'Class) is
    ---------------------------------------------------------------
 
-      Connection_Data            : constant Connection_Class_Access :=
-                                    Connection_Class_Access (Object.Connection_Data);
+      Connection_Data            : constant Connection_Data_Class_Access :=
+                                    Connection_Data_Class_Access (Object.Connection_Data);
 
    begin
       Log (Debug, Here, Who & " enter");
@@ -78,7 +78,7 @@ package body Main_Tests is
    begin
       Log (Debug, Here, Who & " enter");
       T.Connection.Test := T'unchecked_access;
-      T.Connection.Initialize (Connection_ID, Connection_Handler'access, "main test title");
+      T.Connection.Initialize ("main test title", Options.Port);
       Log (Debug, Here, Who & " exit");
 
    exception
@@ -107,9 +107,7 @@ package body Main_Tests is
       T.Connection.Run;
 
       if Options.Pause then
-log (here, who);
          Pause ("before waiting for exit");
-log (here, who);
       end if;
 
       declare
@@ -118,9 +116,7 @@ log (here, who);
 
       begin
          while Ada.Calendar.Clock < Timeout loop
-log (here, who);
             if T.Created then
-log (here, who);
                if not Mouse_Clicked and not Options.Pause then
                   Mouse_Clicked := True;
                   Log (Debug, Here, Who & " simulate mouse click");

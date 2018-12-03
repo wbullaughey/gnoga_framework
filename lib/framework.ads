@@ -1,6 +1,6 @@
 with Ada.Strings.Hash;
 with Ada.Task_Identification;
-with Gnoga.Application.Multi_Connect;
+--with Gnoga.Application.Multi_Connect;
 --with Gnoga.Gui.Base;
 --with Gnoga.Gui.View;
 with Ada.Strings.Unbounded;
@@ -11,8 +11,9 @@ package Framework is
 
    Failed                        : exception;
 
-   type Connection_Data_Type          is new Gnoga.Types.Connection_Data_Type with private;
-   type Connection_Class_Access  is access all Connection_Data_Type'class;
+   type Connection_Data_Type     is new Gnoga.Types.Connection_Data_Type with private;
+   type Connection_Data_Class_Access
+                                 is access all Connection_Data_Type'class;
    subtype Unbounded_String      is Ada.Strings.Unbounded.Unbounded_String;
 
    Debug                         : Boolean := False;
@@ -30,15 +31,10 @@ package Framework is
       Source                     : in     Unbounded_String
    ) return String renames Ada.Strings.Unbounded.To_String;
 
-   function Get_Connection (
-      Connection_ID           : in     String
-   ) return Connection_Class_Access;
+   function Get_Connection return Connection_Data_Class_Access;
 
    procedure Initialize (
       Connection                 : in out Connection_Data_Type;
-      Connection_ID              : in     String;
-      Application_Connection_Handler
-                                 : in     Gnoga.Application.Multi_Connect.Application_Connect_Event;
       Title                      : in     String;
       HTTP_Port                  : in     Positive := 8080);
 
@@ -53,7 +49,7 @@ private
    task type Message_Loop_Task is
 
       entry Start (
-         Connection_Pointer      : in     Connection_Class_Access);
+         Connection_Pointer      : in     Connection_Data_Class_Access);
 
    end Message_Loop_Task;
 

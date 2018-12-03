@@ -3,10 +3,11 @@
 	<Projects>
 		<Project File="ada_lib.vpj"/>
 		<Project File="framework.vpj"/>
-		<Project File="windows/gnoga.vpj"/>
 		<Project File="gnoga_examples.vpj"/>
+		<Project File="../../../vendor/gnoga-aunit/IDE/SlickEdit/GNOGA_Turorials.vpj"/>
 		<Project File="gpr.vpj"/>
 		<Project File="main.vpj"/>
 		<Project File="main_aunit.vpj"/>
+		<Project File="../../../vendor/gnoga-aunit/IDE/SlickEdit/Source.vpj"/>
 	</Projects>
 </Workspace>
