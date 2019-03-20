@@ -18,29 +18,33 @@ package body Main_Tests is
 -- Connection_ID                 : constant String := "root";
 
    ---------------------------------------------------------------
+   overriding
    procedure Connection_Handler (             -- handle new connection from browser
-      Main_Window    : in out Gnoga.Gui.Window.Window_Type'Class;
-      Connection     : access Gnoga.Application.Multi_Connect.Connection_Holder_Type) is
-   pragma Unreferenced (Connection);
+      Connection_Data            : in out Connection_Data_Type;
+      Main_Window                : in out Gnoga.Gui.Window.Window_Type'Class) is
+-- procedure Connection_Handler (             -- handle new connection from browser
+--    Main_Window    : in out Gnoga.Gui.Window.Window_Type'Class;
+--    Connection     : access Gnoga.Application.Multi_Connect.Connection_Holder_Type) is
+-- pragma Unreferenced (Connection);
    ---------------------------------------------------------------
 
    begin
       Log (Debug, Here, Who & " enter");
 
-      declare
-         Connection_Data         : constant Connection_Data_Class_Access :=
-                                    Connection_Data_Class_Access (Framework.Get_Connection);
-
-      begin
-         Main_Window.Connection_Data (Connection_Data);
+--    declare
+--       Connection_Data         : constant Connection_Data_Class_Access :=
+--                                  Connection_Data_Class_Access (Framework.Get_Connection);
+--
+--    begin
+--       Main_Window.Connection_Data (Connection_Data);
          Connection_Data.Form.Create (Main_Window);
          Connection_Data.Ok_Button.On_Create_Handler (Create_Handler'Unrestricted_Access);
          Connection_Data.Ok_Button.Create (Connection_Data.Form, "OK", "Ok", "Ok");
          Connection_Data.Ok_Button.On_Click_Handler (Ok_Handler'Unrestricted_Access);
 
          Connection_Data.Test.Created := True;
-         Connection_Data.Connection_Handler (Main_Window);
-      end;
+--       Connection_Data.Connection_Handler (Main_Window);
+--    end;
 
       Log (Debug, Here, Who & " exit");
    end Connection_Handler;
@@ -93,6 +97,11 @@ package body Main_Tests is
    begin
       Log (Debug, Here, Who & " enter");
       T.Connection.Stop;
+
+      if Options.Pause then
+         Pause ("pause in Tear Down");
+      end if;
+
       CAC.Trace.Tasks.Report;
       Log (Debug, Here, Who & " exit");
    end Tear_Down;
@@ -105,7 +114,6 @@ package body Main_Tests is
    begin
       Log (Debug, Here, Who & " enter");
       T.Connection.Run;
-
       if Options.Pause then
          Pause ("before waiting for exit");
       end if;
@@ -115,18 +123,21 @@ package body Main_Tests is
          Timeout                 : constant Ada.Calendar.Time := Ada.Calendar.Clock + 2.0;
 
       begin
-         while Ada.Calendar.Clock < Timeout loop
-            if T.Created then
-               if not Mouse_Clicked and not Options.Pause then
+         loop
+            if T.Created then             -- wait until window created
+               if not Mouse_Clicked and not Options.Manual then   -- when not Manual simulate mouse click
                   Mouse_Clicked := True;
                   Log (Debug, Here, Who & " simulate mouse click");
-                  Ok_Handler (T.Connection.Object.all);
+                  Ok_Handler (T.Connection.Object.all);     -- simulate the click
                end if;
 
                if T.Connection.OK_Pressed then
                   Log (Debug, Here, Who & " exit succeed");
                   return;
                end if;
+            elsif Ada.Calendar.Clock > Timeout then
+               Log (Debug, Here, Who & " timeout waiting for mouse click");
+               exit;
             end if;
             delay 0.1;
          end loop;
@@ -134,7 +145,10 @@ package body Main_Tests is
 
       Assert (False, "Created should be set");
       Assert (False, "Ok should have been pressed");
-      Log (Debug, Here, Who & " exit failure");
+
+   exception
+      when Fault: others =>
+         CAC.Unit_Test.Setup.Set_Up_Exception (Fault, Here, Who);
    end Test_Main;
 
 end Main_Tests;

@@ -22,4 +22,4 @@ $PROJECT_DIRECTORY/gpr/setup.sh      \
     $TARGET                 \
     $BUILD_DIRECTORY        \
     $PROJECT_DIRECTORY      \
-    -aP ../lib -aP ../main -d $@
+    -aP ../lib -aP ../main $@

@@ -5,7 +5,7 @@ with AUnit;
 with AUnit.Test_Fixtures;
 with Framework;
 --with Tabbed_Window_Framework;
-with Gnoga.Application.Multi_Connect;
+--with Gnoga.Application.Multi_Connect;
 with Gnoga.Gui.Base;
 with Gnoga.Gui.Element.Form;
 --with Gnoga.Gui.View;
@@ -15,7 +15,7 @@ with Gnoga.Gui.Window;
 package Main_Tests is
 
    type Test_Type;
-   type Connection_Data_Type          is new Framework.Connection_Data_Type with record
+   type Connection_Data_Type     is new Framework.Connection_Data_Type with record
       Form                       : Gnoga.Gui.Element.Form.Form_Type;
       Object                     : Gnoga.Gui.Base.Pointer_To_Base_Class;
       Ok_Button                  : Gnoga.Gui.Element.Form.Input_Button_Type;
@@ -25,9 +25,14 @@ package Main_Tests is
 
    type Connection_Data_Class_Access  is access all Connection_Data_Type'class;
 
+   overriding
    procedure Connection_Handler (             -- handle new connection from browser
-      Main_Window                : in out Gnoga.Gui.Window.Window_Type'Class;
-      Connection                 : access Gnoga.Application.Multi_Connect.Connection_Holder_Type);
+      Connection_Data            : in out Connection_Data_Type;
+      Main_Window                : in out Gnoga.Gui.Window.Window_Type'Class);
+
+-- procedure Connection_Handler (             -- handle new connection from browser
+--    Main_Window                : in out Gnoga.Gui.Window.Window_Type'Class;
+--    Connection                 : access Gnoga.Application.Multi_Connect.Connection_Holder_Type);
 
    type Test_Type                is new AUnit.Test_Fixtures.Test_Fixture with record
       Connection                 : aliased Connection_Data_Type;

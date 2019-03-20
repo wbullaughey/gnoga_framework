@@ -13,8 +13,8 @@ with CAC.Trace.Tasks; use CAC.Trace;
 with Command_Line_Iterator;
 with Docker_Suite;
 with Docker_Tests;
-with Framework.Dock;
-with Framework.Table;
+with Framework;
+--with Widget.Table;
 with GNOGA;
 with Main_Suite;
 with Main_Tests;
@@ -23,6 +23,7 @@ with Options;
 --with Top_Window;
 --with Top_Window_Suite;
 --with Top_Window_Tests;
+with Widget;
 
 procedure Main is
 
@@ -63,28 +64,33 @@ procedure Main is
 
    begin
       Put_Line (Ada.Command_Line.Command_Name);
-      Put_Line ("   -e <expression>    filter expression");
-      Put_Line ("   -h                 this message");
---    Put_Line ("   -i                 interactive mode");
-      Put_Line ("   -m                 manual test");
-      Put_Line ("   -p                 enable debug pause");
-      Put_Line ("   -s <test suite>    select test suite to run");
-      Put_Line ("   -S <test suite>    inhibit test suite to run");
-      Put_Line ("   -t <trace option>  select trace to turn on");
-      Put_Line ("   -T <trace output option>  select trace option to change default");
+      Put_Line ("   -e <expression>                filter expression");
+      Put_Line ("   -h                             this message");
+--    Put_Line ("   -i                             interactive mode");
+      Put_Line ("   -m                             manual test");
+      Put_Line ("   -p                             enable debug pause");
+      Put_Line ("   -s <test suite>                select test suite to run");
+      Put_Line ("   -S <test suite>                inhibit test suite to run");
+      Put_Line ("   -t <trace option>              select trace to turn on");
+      Put_Line ("   -T <trace output opintion>     select trace option to toggle default");
       Put_Line ("trace options:");
-      Put_Line ("   -a                 all");
-      Put_Line ("   -d                 dock");
-      Put_Line ("   -f                 framework");
-      Put_Line ("   -g                 gnoga");
-      Put_Line ("   -t                 table");
-      Put_Line ("   -w                 top window");
+      Put_Line ("   -a                             all");
+      Put_Line ("   -c                             CAC Libck");
+      Put_Line ("   -d                             dock");
+      Put_Line ("   -f                             framework");
+      Put_Line ("   -g                             gnoga");
+      Put_Line ("   -m                             main");
+      Put_Line ("   -w                             Widget");
+      New_Line;
+      Put_Line ("trace output opintion:");
+      Put_Line ("   -p                             include task id on output");
+      Put_Line ("   -t                             include time stamp on output");
       New_Line;
       Put_Line ("  <test suite>");
-      Put_Line ("   c                  CAC.Trace");
-      Put_Line ("   d                  docker");
-      Put_Line ("   m                  main");
-      Put_Line ("   t                  top window");
+      Put_Line ("   c                              CAC.Trace");
+      Put_Line ("   d                              docker");
+      Put_Line ("   m                              main");
+      Put_Line ("   t                              tests");
 
       CAC.OS.Immediate_Halt (0);
    end Help;
@@ -207,18 +213,16 @@ begin
 
                                  when 'a' =>
                                     CAC.Trace.CAC_Lib_Debug := True;
-                                    Framework.Dock.Debug := True;
                                     Docker_Tests.Debug := True;
                                     Framework.Debug := True;
                                     GNOGA.Debug := True;
                                     Main_Tests.Debug := True;
-                                    Framework.Table.Debug := True;
+                                    Widget.Debug := True;
 
                                  when 'c' =>
                                     CAC.Trace.CAC_Lib_Debug := True;
 
                                  when 'd' =>
-                                    Framework.Dock.Debug := True;
                                     Docker_Tests.Debug := True;
 
                                  when 'f' =>
@@ -230,14 +234,11 @@ begin
                                  when 'm' =>
                                     Main_Tests.Debug := True;
 
-                                 when 't' =>
-                                    Framework.Table.Debug := True;
-
---                               when 'w' =>
---                                  Top_Window.Debug := True;
+                                 when 'w' =>
+                                    Widget.Debug := True;
 
                                  when Others =>
-                                    Put_Line ("invalid option '" & Option & "'");
+                                    Put_Line ("invalid trace option '" & Trace & "'");
                                     CAC.OS.Immediate_Halt (-1);
 
                               end case;
@@ -245,32 +246,32 @@ begin
                         end loop;
                      end;
 
---                when 'T' =>
---                   declare
---                      Parameter   : constant String := Iterator.Get_Parameter;
---
---                   begin
---                      for Index in Parameter'range  loop
---                         declare
---                            Trace    : constant Character := Parameter (Index);
---
---                         begin
---                            case Trace is
---
---                               when 'p' =>
---                                  Cac.trace.include_Task := not Cac.trace.include_Task;
---
---                               when 't' =>
---                                  Cac.trace.include_Time := not Cac.trace.include_Time;
---
---                               when others =>
---                                  Put_Line ("unexpected trace option '" & Trace & "'");
---                                  Help;
---
---                            end case;
---                         end;
---                      end loop;
---                   end;
+                  when 'T' =>
+                     declare
+                        Parameter   : constant String := Iterator.Get_Parameter;
+
+                     begin
+                        for Index in Parameter'range  loop
+                           declare
+                              Trace    : constant Character := Parameter (Index);
+
+                           begin
+                              case Trace is
+
+                                 when 'p' =>
+                                    Cac.trace.include_Task := not Cac.trace.include_Task;
+
+                                 when 't' =>
+                                    Cac.trace.include_Time := not Cac.trace.include_Time;
+
+                                 when others =>
+                                    Put_Line ("unexpected trace option '" & Trace & "'");
+                                    Help;
+
+                              end case;
+                           end;
+                        end loop;
+                     end;
 
                   when 'v' =>
                      Framework.Verbose := True;

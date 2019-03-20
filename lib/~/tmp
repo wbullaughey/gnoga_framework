@@ -1,0 +1,142 @@
+
+function load_file(name) {
+  Logger.log(name);
+  var file = {
+    title: 'Converted Spreadsheet'
+  };
+  file = Drive.Files.insert(file, name, {
+    convert: true
+  });
+}
+/**
+ * Lists the top-level folders in the user's Drive.
+ */
+function get_team_drives() {
+  var iterator = DriveApp.getFoldersByName ("Finance");
+//  var iterator = DriveApp.getFiles ();
+//  Logger.log(drive.getName());
+//
+  while (iterator.hasNext()) {
+    var file = iterator.next();
+    Logger.log(file.getName());
+  }
+}
+function getGoogleTeamDrives() {
+  var count = 0;
+  var pages = 0;
+  try {
+
+    var teamDrives = {},
+        baseUrl = "https://www.googleapis.com/drive/v3/teamdrives",
+        token = ScriptApp.getOAuthToken(),
+        params = {
+          pageSize: 100,
+          fields: "nextPageToken,teamDrives(id,name)"
+        };
+
+//    do {
+
+      // Written by Amit Agarwal @labnol
+      // Web: www.ctrlq.org
+
+      var queryString = Object.keys(params).map(function(p) {
+        return [encodeURIComponent(p), encodeURIComponent(params[p])].join("=");
+      }).join("&amp;");
+
+      var apiUrl = baseUrl + "?" + queryString;
+
+      var response = JSON.parse(
+        UrlFetchApp.fetch( apiUrl, {
+          method: "GET",
+          headers: {"Authorization": "Bearer " + token}
+        }).getContentText());
+
+      response.teamDrives.forEach(function(teamDrive) {
+  Logger.log(teamDrive.name);
+        teamDrives[teamDrive.name] = teamDrive.id;
+        count = count + 1;
+      })
+
+      params.pageToken = response.nextPageToken;
+      pages = pages + 1;
+//    } while (params.pageToken);
+
+    return teamDrives;
+
+  } catch (f) {
+
+    Logger.log(f.toString());
+
+  }
+
+  return false;
+
+}
+function getGoogleTeamDrive (name) {
+  var drives = {};
+
+  drives = getGoogleTeamDrives();
+
+  if (drives.hasOwnProperty(name)) {
+     Logger.log ("found drive " + name + " with ID " + drives [name]);
+    return drives [name];
+  } else {
+    Logger.log (name + " not found");
+    throw name + " not found";
+  }
+}
+function getTeamDriveSubdirectory (team_drive_name, subdirectory_path) {
+  var team_drive_id = getGoogleTeamDrive (team_drive_name);
+  var folder = DriveApp.getFolderById (team_drive_id);
+  var found = false;
+
+  for (var index in subdirectory_path) {
+    var subdirectory = subdirectory_path[index];
+    Logger.log ("look for subdirectory " + subdirectory);
+    var iterator = folder.getFolders ();
+
+    while (iterator.hasNext()) {
+      var subfolder = iterator.next();
+      Logger.log(subfolder.getName());
+      if (subfolder.getName () == subdirectory) {
+        found = true;
+        folder = subfolder;
+        break;
+      }
+    }
+    if ( ! found) {
+      throw "subfoler " + subdirectory + " not found";
+    }
+  }
+  return folder;
+}
+
+function test () {
+  var folder = getTeamDriveSubdirectory ("Finance", [ "Board Meetings", " January" ]);
+
+  Logger.log(folder.getName());
+}
+function test2 () {
+  drive_id = getGoogleTeamDrive ("Finance");
+  var folder = DriveApp.getFolderById (drive_id);
+  Logger.log ("folder name " + folder.getName ());
+
+  var iterator = folder.getFiles ();
+  var count = 0;
+  while (iterator.hasNext()) {
+    var file = iterator.next();
+    Logger.log(file.getName());
+    count = count + 1;
+  }
+  Logger.log("file count " + count);
+
+  iterator = folder.getFolders ();
+  count = 0;
+  while (iterator.hasNext()) {
+    var folder = iterator.next();
+    Logger.log(folder.getName());
+    count = count + 1;
+  }
+  Logger.log("folder count " + count);
+}
+

@@ -1,1 +1,27 @@
-with "ada_lib";with "ada_lib_aunit_lib";with "application_library";with "aunit";with "base";with "framework";with "gnoga";with "root";with "main_lib";project Main is   for Languages use ("Ada");   for Exec_Dir use "bin";   for Main use ("main.adb");   for Object_Dir use Root.Object_Directory;   for Source_Dirs use (".");-- for Source_Files use (--      "main.adb",--      "table.adb",--      "table.ads");   package Compiler renames Root.Compiler;   package Builder is      for Executable ("main.adb") use "gnoga_aunit";   end Builder;end Main;
+with "ada_lib";
+with "ada_lib_aunit_lib";
+with "application_library";
+with "aunit";
+with "base";
+with "framework";
+with "gnoga";
+with "root";
+--with "main_lib";
+
+project Main is
+   for Languages use ("Ada");
+   for Exec_Dir use "bin";
+   for Main use ("main.adb");
+   for Object_Dir use Root.Object_Directory;
+   for Source_Dirs use (".");
+-- for Source_Files use (
+--      "main.adb",
+--      "table.adb",
+--      "table.ads");
+
+
+   package Compiler renames Root.Compiler;
+   package Builder is
+      for Executable ("main.adb") use "gnoga_aunit";
+   end Builder;
+end Main;

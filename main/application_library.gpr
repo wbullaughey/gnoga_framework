@@ -12,9 +12,9 @@ library project Application_library is
    for Library_Kind use Base.Library_Kind;
    for Library_Dir use Root.Library_Directory;
    for Source_Files use (
-      "types.ads",
-      "widget.ads",
-      "widget.adb"
+      "types.ads"
+--    "widget.ads",
+--    "widget.adb"
    );
 
    package Compiler renames Root.Compiler;
