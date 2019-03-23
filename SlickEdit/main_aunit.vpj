@@ -141,7 +141,7 @@
                 RunFromDir="%rw"
                 ClearProcessBuffer="1"
                 Beep="1">
-                <Exec CmdLine="sh ./build.sh main_windows macosx debug"/>
+                <Exec CmdLine="sh ./build.sh main macosx debug"/>
             </Target>
             <Target
                 Name="Rebuild"
