@@ -1,25 +1,20 @@
-#!/bin/bash
-TARGET=$1
-LIB=$2
-shift 2
+#!/bin/sh
+# $1 = target program to build
+# $2 = architecture: intel | ppm | lightender
+# $3 = target: debug | release
+echo running $0 at `pwd`
 
-CURRENT_DIRECTORY=`pwd`
-BUILD_DIRECTORY=$CURRENT_DIRECTORY/bin
-PROJECT_DIRECTORY=$CURRENT_DIRECTORY../..
+export PROGRAM=$1
+export ARCHITECTURE=$2
+export TARGET=$3
+shift 3
 
-echo BUILD_DIRECTORY $BUILD_DIRECTORY
-echo CURRENT_DIRECTORY $CURRENT_DIRECTORY
-echo LIB $LIB
-echo PROJECT_DIRECTORY $PROJECT_DIRECTORY
-echo TARGET $TARGET
+while [ "$1" != "" ]; do    # use this to add extra defines like EDFA1
+    echo define $1
+        export $1
+        shift 1
+done
 
 killall -9 main
-$PROJECT_DIRECTORY/gpr/setup.sh      \
-    gprbuild                \
-    main.gpr                \
-    macosx                  \
-    $LIB                    \
-    $TARGET                 \
-    $BUILD_DIRECTORY        \
-    $PROJECT_DIRECTORY      \
-    -aP ../lib -aP ../main $@
+
+./local_build.sh

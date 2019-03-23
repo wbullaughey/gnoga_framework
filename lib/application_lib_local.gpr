@@ -1,0 +1,1 @@
+with "base";abstract project Application_Lib_Local is   Directory_Suffix := "";   Target_Suffix := "";end Application_Lib_Local;

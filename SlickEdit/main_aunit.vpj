@@ -46,7 +46,7 @@
                 RunFromDir="%rw"
                 ClearProcessBuffer="1"
                 Beep="1">
-                <Exec CmdLine="build.bat"/>
+                <Exec CmdLine="C:\cygwin64\BIN\sh.exe ./build.sh main windows debug USER=wayne"/>
             </Target>
             <Target
                 Name="Rebuild"
