@@ -127,8 +127,8 @@ package body Docker_Child_Tests is
       Class_Connection_Data.Add_Card ("Test Card 3 ", Card_3,
             Select_Card => False);
 --          Card_ID     => "card 3");
-      Card_3.Top_Dock (Card_3.Child_1'access);
-      Card_3.Fill_Dock (Card_3.Child_2'access);
+      Card_3.Fill_Dock (Card_3.Child_1'access);
+      Card_3.Top_Dock (Card_3.Child_2'access);
       Card_3.Right_Dock (Card_3.Child_3'access);
 
       Log (Debug, Here, Who & " exit");
@@ -164,7 +164,7 @@ package body Docker_Child_Tests is
 
    begin
       Log (Debug, Here, Who & " enter 2");
-      Gnoga.Gui.View.View_Type (Card).Create (Parent, ID);
+      Framework.Dock_Base.Docker_Type (Card).Create (Parent, ID);
       Card.Content.Create (Card, "card 2 content", "card 2 ID");
       Log (Debug, Here, Who & " exit 2");
    end Create;
@@ -179,7 +179,7 @@ package body Docker_Child_Tests is
 
    begin
       Log (Debug, Here, Who & " enter 3");
-      Gnoga.Gui.View.View_Type (Card).Create (Parent, ID);
+      Framework.Dock_Base.Docker_Type (Card).Create (Parent, ID);
       Card.Child_1.Create (Card, "child 1");
       Card.Child_2.Create (Card, "child 2");
       Card.Child_3.Create (Card, "child 3");
@@ -346,8 +346,6 @@ Log (Here, Who);
    procedure Test_Docker_Child (
       T                          : in out Docker_Child_Test_Type) is
    ---------------------------------------------------------------
-
-      Card_2                     : Card_2_Access;
 
    begin
       Log (Debug, Here, Who & " enter");

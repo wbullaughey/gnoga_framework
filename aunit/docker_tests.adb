@@ -6,6 +6,7 @@ with CAC.Unit_Test.Setup;
 with Framework.Dock.Dock_Helper;
 with Gnoga.Gui.Base;
 with Gnoga.Gui.Element.Common;
+with Gnoga.Gui.View.Docker;
 with Options;
 
 package body Docker_Tests is
@@ -35,18 +36,6 @@ package body Docker_Tests is
    overriding
    procedure Create (
       Card                       : in out Card_2_Type;
-      Parent                     : in out Gnoga.Gui.Base.Base_Type'Class;
-      ID                         : in     String);
-
-   type Child_Type               is new Gnoga.Gui.View.View_Type with record
-      Content                    : Gnoga.Gui.Element.Common.DIV_Type;
-   end record;
-
-   type Child_Access             is access Child_Type'class;
-
-   overriding
-   procedure Create (
-      Child                       : in out Child_Type;
       Parent                     : in out Gnoga.Gui.Base.Base_Type'Class;
       ID                         : in     String);
 
@@ -137,24 +126,9 @@ package body Docker_Tests is
 
    begin
       Log (Debug, Here, Who & " enter 2");
-      Gnoga.Gui.View.View_Type (Card).Create (Parent, ID);
+      Gnoga.Gui.View.Docker.Docker_View_Type (Card).Create (Parent, ID);
       Card.Content.Create (Card, "card 2 content", "card 2 ID");
       Log (Debug, Here, Who & " exit 2");
-   end Create;
-
-   ---------------------------------------------------------------
-   overriding
-   procedure Create (
-      Child                       : in out Child_Type;
-      Parent                     : in out Gnoga.Gui.Base.Base_Type'Class;
-      ID                         : in     String) is
-   ---------------------------------------------------------------
-
-   begin
-      Log (Debug, Here, Who & " enter child");
-      Gnoga.Gui.View.View_Type (Child).Create (Parent, ID);
-      Child.Content.Create (Parent, ID);
-      Log (Debug, Here, Who & " exit 3");
    end Create;
 
    ---------------------------------------------------------------

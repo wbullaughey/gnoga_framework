@@ -71,9 +71,13 @@
             Filters=""
             GUID="{7E3D1416-5C04-4EDB-ABC1-3C426C1DB37A}">
             <F
-                N="../../../vendor/gnoga-code/src/*.ad*"
-                Recurse="0"
-                Excludes=".git/"/>
+                N="/vendor/gnoga-aunit/components/message_boxes/*.ad*"
+                Recurse="1"
+                Excludes=""/>
+            <F
+                N="/vendor/gnoga-aunit/src/*.ad*"
+                Recurse="1"
+                Excludes=""/>
         </Folder>
     </Files>
 </Project>
