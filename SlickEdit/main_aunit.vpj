@@ -118,7 +118,8 @@
                 Deletable="0"
                 OutputExts="*.o"
                 SaveOption="SaveCurrent"
-                RunFromDir="%rw">
+                RunFromDir="%rw"
+                ClearProcessBuffer="1">
                 <Exec CmdLine='g++ -c %xup  %defd -g -o "%bd%n%oe" %i "%f"'/>
             </Target>
             <Target

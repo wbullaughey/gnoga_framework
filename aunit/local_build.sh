@@ -4,7 +4,7 @@ echo running $0 at $pwd
 echo build $PROGRAM for $ARCHITECTURE $TARGET
 echo building libraries with $LIB
 export BUILD_DATE=`date`
-echo BUILD_DATE=$BUILD_DATE
+# echo BUILD_DATE=$BUILD_DATE
 export PROJECT_DIRECTORY=`pwd`
 echo PROJECT_DIRECTORY=$PROJECT_DIRECTORY
 export ROOT_DIRECTORY="$PROJECT_DIRECTORY/../.."

@@ -71,15 +71,11 @@
             Filters=""
             GUID="{9C39701F-E761-4075-8326-6ADD060A1836}">
             <F
-                N="../../../vendor/gnoga-code/demo/*.ad*"
+                N="../../../vendor/gnoga-aunit/demo/*.ad*"
                 Recurse="1"
                 Excludes=".git/"/>
             <F
-                N="../../../vendor/gnoga-code/test/*.ad*"
-                Recurse="1"
-                Excludes=".git/"/>
-            <F
-                N="../../../vendor/gnoga-code/tutorial/*.ad*"
+                N="../../../vendor/gnoga-aunit/tutorial/*.ad*"
                 Recurse="1"
                 Excludes=".git/"/>
         </Folder>

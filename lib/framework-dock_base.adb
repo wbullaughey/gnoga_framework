@@ -68,7 +68,7 @@ package body Framework.Dock_Base is
 
    ----------------------------------------------------------------------------
    function Inner (
-      Dock                       : in out Dock_Type
+      Dock                       : in out Docker_Type
    ) return access Gnoga.Gui.View.Docker.Docker_View_Type'Class is
    ----------------------------------------------------------------------------
 
@@ -91,7 +91,7 @@ package body Framework.Dock_Base is
 
 -- ----------------------------------------------------------------------------
 -- procedure Top_Dock (
---    View                       : in out Dock_Type;
+--    View                       : in out Docker_Type;
 --    Dock                       : access Gnoga.Gui.View.View_Base_Type'Class) is
 -- ----------------------------------------------------------------------------
 --

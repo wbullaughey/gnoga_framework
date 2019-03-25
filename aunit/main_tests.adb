@@ -15,37 +15,20 @@ package body Main_Tests is
    procedure Ok_Handler (
       Object                     : in out Gnoga.Gui.Base.Base_Type'Class);
 
--- Connection_ID                 : constant String := "root";
-
    ---------------------------------------------------------------
    overriding
    procedure Connection_Handler (             -- handle new connection from browser
       Connection_Data            : in out Connection_Data_Type;
       Main_Window                : in out Gnoga.Gui.Window.Window_Type'Class) is
--- procedure Connection_Handler (             -- handle new connection from browser
---    Main_Window    : in out Gnoga.Gui.Window.Window_Type'Class;
---    Connection     : access Gnoga.Application.Multi_Connect.Connection_Holder_Type) is
--- pragma Unreferenced (Connection);
    ---------------------------------------------------------------
 
    begin
       Log (Debug, Here, Who & " enter");
-
---    declare
---       Connection_Data         : constant Connection_Data_Class_Access :=
---                                  Connection_Data_Class_Access (Framework.Get_Connection);
---
---    begin
---       Main_Window.Connection_Data (Connection_Data);
-         Connection_Data.Form.Create (Main_Window);
-         Connection_Data.Ok_Button.On_Create_Handler (Create_Handler'Unrestricted_Access);
-         Connection_Data.Ok_Button.Create (Connection_Data.Form, "OK", "Ok", "Ok");
-         Connection_Data.Ok_Button.On_Click_Handler (Ok_Handler'Unrestricted_Access);
-
-         Connection_Data.Test.Created := True;
---       Connection_Data.Connection_Handler (Main_Window);
---    end;
-
+      Connection_Data.Form.Create (Main_Window);
+      Connection_Data.Ok_Button.On_Create_Handler (Create_Handler'Unrestricted_Access);
+      Connection_Data.Ok_Button.Create (Connection_Data.Form, "OK", "Ok", "Ok");
+      Connection_Data.Ok_Button.On_Click_Handler (Ok_Handler'Unrestricted_Access);
+      Connection_Data.Test.Created := True;
       Log (Debug, Here, Who & " exit");
    end Connection_Handler;
 

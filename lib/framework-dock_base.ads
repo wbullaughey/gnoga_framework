@@ -8,8 +8,8 @@ with Gnoga.Gui.Window;
 
 package Framework.Dock_Base is
 
-   type Dock_Type                is new Gnoga.Gui.View.Docker.Docker_View_Type with private;
-   type Dock_Class_Access        is access all Dock_Type'class;
+   type Docker_Type                is new Gnoga.Gui.View.Docker.Docker_View_Type with private;
+   type Dock_Class_Access        is access all Docker_Type'class;
 
    type Base_Connection_Data_Type is abstract new Framework.Connection_Data_Type with record
       Cards                      : aliased Gnoga.Gui.View.Card.Card_View_Type;
@@ -18,9 +18,9 @@ package Framework.Dock_Base is
       -- contains the Tabs, Table and Cards. The Tabs are always visible and are used
       -- The Table is always visible
       -- to select which Card nested under Cards is visible
-      Dock                       : Dock_Class_Access := Null;
+--    Dock                       : Dock_Class_Access := Null;
       Dock_Initialized           : Boolean := False;
-      Docker                     : aliased Gnoga.Gui.View.Docker.Docker_View_Type;
+      Docker                     : Dock_Class_Access := Null;
       -- is the view for the applications main window
       -- Panel and Deck are docked to it
       Exit_Button                : Gnoga.Gui.Element.Common.Button_Type;
@@ -66,7 +66,7 @@ package Framework.Dock_Base is
       Main_Window                : in out Gnoga.Gui.Window.Window_Type'Class);
 
 -- procedure Create (
---    Dock                       : in out Dock_Type;
+--    Dock                       : in out Docker_Type;
 --    Parent                     : in out Gnoga.Gui.Base.Base_Type'Class;
 --    ID                         : in     String  := "");
 
@@ -76,7 +76,7 @@ package Framework.Dock_Base is
    ) return Gnoga.Gui.View.Pointer_To_View_Base_Class;
 
    function Inner (
-      Dock                       : in out Dock_Type
+      Dock                       : in out Docker_Type
    ) return access Gnoga.Gui.View.Docker.Docker_View_Type'Class;
 
    function Parent (
@@ -84,11 +84,11 @@ package Framework.Dock_Base is
    ) return Gnoga.Gui.View.Card.Pointer_To_Card_View_Class;
 
 -- procedure Top_Dock (
---    View                       : in out Dock_Type;
+--    View                       : in out Docker_Type;
 --    Dock                       : access Gnoga.Gui.View.View_Base_Type'Class);
 
 private
 
-   type Dock_Type                is new Gnoga.Gui.View.Docker.Docker_View_Type with null record;
+   type Docker_Type                is new Gnoga.Gui.View.Docker.Docker_View_Type with null record;
 
 end Framework.Dock_Base;

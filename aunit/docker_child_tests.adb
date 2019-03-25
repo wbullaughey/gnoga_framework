@@ -5,14 +5,15 @@ with CAC.Trace; use CAC.Trace;
 with CAC.Unit_Test.Setup;
 with Framework.Dock.Dock_Helper;
 with Gnoga.Gui.Base;
+with Gnoga.Gui.View.Docker;
 with Gnoga.Gui.Element.Common;
 with Options;
 
-package body Docker_Tests is
+package body Docker_Child_Tests is
 
    use type Ada.Calendar.Time;
 
-   package Dock_Helper_Package is new Dock_Package.Dock_Helper;
+   package Dock_Helper_Package is new Dock_Child_Package.Dock_Helper;
 
    type Card_1_Type              is new Gnoga.Gui.View.View_Type with record
       Content                    : Gnoga.Gui.Element.Common.DIV_Type;
@@ -50,7 +51,21 @@ package body Docker_Tests is
       Parent                     : in out Gnoga.Gui.Base.Base_Type'Class;
       ID                         : in     String);
 
-   procedure Docker_Test_Button_Handler (
+   type Card_3_Type              is new Framework.Dock_Base.Docker_Type with record
+      Child_1                    : aliased Child_Type;
+      Child_2                    : aliased Child_Type;
+      Child_3                    : aliased Child_Type;
+   end record;
+
+   type Card_3_Access            is access Card_3_Type;
+
+   overriding
+   procedure Create (
+      Card                       : in out Card_3_Type;
+      Parent                     : in out Gnoga.Gui.Base.Base_Type'Class;
+      ID                         : in     String);
+
+   procedure Docker_Child_Test_Button_Handler (
       Object                     : in out Gnoga.Gui.Base.Base_Type'Class);
 
    procedure Resize_Handler (
@@ -71,15 +86,16 @@ package body Docker_Tests is
    ---------------------------------------------------------------
    overriding
    procedure Application_Initialization (             -- handle new connection from browser
-      Connection_Data            : in out Dock_Test_Connection_Data_Type;
+      Connection_Data            : in out Dock_Child_Test_Connection_Data_Type;
       Main_Window                : in out Gnoga.Gui.Window.Window_Type'Class) is
    pragma Unreferenced (Main_Window);
    ---------------------------------------------------------------
 
       Card_1                     : Card_1_Access;
       Card_2                     : Card_2_Access;
-      Class_Connection_Data      : Dock_Test_Connection_Data_Type'class renames
-                                    Dock_Test_Connection_Data_Type'class (Connection_Data);
+      Card_3                     : Card_3_Access;
+      Class_Connection_Data      : Dock_Child_Test_Connection_Data_Type'class renames
+                                    Dock_Child_Test_Connection_Data_Type'class (Connection_Data);
       ID                         : constant String := "card 1";
 
    begin
@@ -94,7 +110,7 @@ package body Docker_Tests is
 
       Log (Debug,  Here,  Who & " add button");
 
-      Class_Connection_Data.Add_Button ("test_button", Docker_Test_Button_Handler'access);
+      Class_Connection_Data.Add_Button ("test_button", Docker_Child_Test_Button_Handler'access);
 
       Log (Debug,  Here,  Who & " add card 2");
       Card_2 := new Card_2_Type;
@@ -103,6 +119,17 @@ package body Docker_Tests is
       Class_Connection_Data.Add_Card ("Test Card 2 ", Card_2,
             Select_Card => False);
 --          Card_ID     => "card 2");
+
+      Log (Debug,  Here,  Who & " add card 3");
+      Card_3 := new Card_3_Type;
+      Card_3.Dynamic;
+      Card_3.Create (Connection_Data.Parent.all, "card 3");
+      Class_Connection_Data.Add_Card ("Test Card 3 ", Card_3,
+            Select_Card => False);
+--          Card_ID     => "card 3");
+      Card_3.Top_Dock (Card_3.Child_1'access);
+      Card_3.Fill_Dock (Card_3.Child_2'access);
+      Card_3.Right_Dock (Card_3.Child_3'access);
 
       Log (Debug, Here, Who & " exit");
    end Application_Initialization;
@@ -145,6 +172,24 @@ package body Docker_Tests is
    ---------------------------------------------------------------
    overriding
    procedure Create (
+      Card                       : in out Card_3_Type;
+      Parent                     : in out Gnoga.Gui.Base.Base_Type'Class;
+      ID                         : in     String) is
+   ---------------------------------------------------------------
+
+   begin
+      Log (Debug, Here, Who & " enter 3");
+      Gnoga.Gui.View.View_Type (Card).Create (Parent, ID);
+      Card.Child_1.Create (Card, "child 1");
+      Card.Child_2.Create (Card, "child 2");
+      Card.Child_3.Create (Card, "child 3");
+      Card.On_Resize_Handler (Resize_Handler'access);
+      Log (Debug, Here, Who & " exit 3");
+   end Create;
+
+   ---------------------------------------------------------------
+   overriding
+   procedure Create (
       Child                       : in out Child_Type;
       Parent                     : in out Gnoga.Gui.Base.Base_Type'Class;
       ID                         : in     String) is
@@ -158,21 +203,21 @@ package body Docker_Tests is
    end Create;
 
    ---------------------------------------------------------------
-   procedure Docker_Test_Button_Handler (
+   procedure Docker_Child_Test_Button_Handler (
       Object                     : in out Gnoga.Gui.Base.Base_Type'Class) is
    ---------------------------------------------------------------
 
-      Connection_Data            : Docker_Test_Connection_Data_Type renames
-                                    Docker_Test_Connection_Data_Type (Object.Connection_Data.all);
+      Connection_Data            : Docker_Child_Test_Connection_Data_Type renames
+                                    Docker_Child_Test_Connection_Data_Type (Object.Connection_Data.all);
    begin
       Log (Debug, Here, Who & " enter");
       Connection_Data.Test_Pressed := True;
       Log (Debug, Here, Who & " exit");
-   end Docker_Test_Button_Handler;
+   end Docker_Child_Test_Button_Handler;
 
    ---------------------------------------------------------------
    procedure Finish_Up (
-      T                          : in out Docker_Test_Type) is
+      T                          : in out Docker_Child_Test_Type) is
    ---------------------------------------------------------------
 
       Mouse_Clicked           : Boolean := False;
@@ -211,7 +256,7 @@ package body Docker_Tests is
    ---------------------------------------------------------------
    overriding
    procedure Initialize (
-      Connection_Data            : in out Dock_Test_Connection_Data_Type) is
+      Connection_Data            : in out Dock_Child_Test_Connection_Data_Type) is
    ---------------------------------------------------------------
 
    begin
@@ -245,7 +290,7 @@ package body Docker_Tests is
    ---------------------------------------------------------------
    overriding
    function Parent (
-      Connection_Data            : in out Dock_Test_Connection_Data_Type
+      Connection_Data            : in out Dock_Child_Test_Connection_Data_Type
    ) return Gnoga.Gui.View.Card.Pointer_To_Card_View_Class is
    ---------------------------------------------------------------
 
@@ -266,10 +311,10 @@ package body Docker_Tests is
 
    ---------------------------------------------------------------
    procedure Set_Up (
-      T                          : in out Docker_Test_Type) is
+      T                          : in out Docker_Child_Test_Type) is
    ---------------------------------------------------------------
 
-      Connection_Data            : Docker_Test_Connection_Data_Type renames T.Connection_Data;
+      Connection_Data            : Docker_Child_Test_Connection_Data_Type renames T.Connection_Data;
 
    begin
       Log (Debug, Here, Who & " enter");
@@ -287,7 +332,7 @@ Log (Here, Who);
    end Set_Up;
 
    ---------------------------------------------------------------
-   procedure Tear_Down (T : in out Docker_Test_Type) is
+   procedure Tear_Down (T : in out Docker_Child_Test_Type) is
    ---------------------------------------------------------------
 
    begin
@@ -298,8 +343,8 @@ Log (Here, Who);
    end Tear_Down;
 
    ---------------------------------------------------------------
-   procedure Test_Docker (
-      T                          : in out Docker_Test_Type) is
+   procedure Test_Docker_Child (
+      T                          : in out Docker_Child_Test_Type) is
    ---------------------------------------------------------------
 
       Card_2                     : Card_2_Access;
@@ -317,8 +362,8 @@ Log (Here, Who);
       when Fault: others =>
          Trace_Exception (Fault, Here, Who);
 
-   end Test_Docker;
+   end Test_Docker_Child;
 
 
 
-end Docker_Tests;
+end Docker_Child_Tests;

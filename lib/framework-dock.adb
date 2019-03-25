@@ -62,20 +62,20 @@ package body Framework.Dock is
       Log (Debug, Here, Who & " enter");
       Connection_Data.Set_Window (Main_Window'unchecked_access);  -- need to set Main_Window before start creating objects
                                                                   -- so message loops can run
-      Connection_Data.Dock.Create (Main_Window, "top level dock");
-      Connection_Data.Docker.Create (Connection_Data.Dock.all, "Docker");
-      Connection_Data.Docker.Box_Height (100, "%");
-      Connection_Data.Dock.Top_Dock (Connection_Data.Docker'Access);
+      Connection_Data.Docker.Create (Main_Window, "top level dock");
+--    Connection_Data.Docker.Create (Connection_Data.Dock.all, "Docker");
+--    Connection_Data.Docker.Box_Height (100, "%");
+--    Connection_Data.Dock.Top_Dock (Connection_Data.Docker'Access);
 
-      Connection_Data.Panel.Create (Connection_Data.Docker, "Panel");
+      Connection_Data.Panel.Create (Connection_Data.Docker.all, "Panel");
       Connection_Data.Panel.Background_Color ("silver");
+      Connection_Data.Docker.Top_Dock (Connection_Data.Panel'Access);
 
       Connection_Data.Exit_Button.Create (Connection_Data.Panel, "Exit Application");
       Connection_Data.Exit_Button.On_Click_Handler (On_Exit'Unrestricted_Access);
 
-      Connection_Data.Docker.Top_Dock (Connection_Data.Panel'Access);
-      Connection_Data.Deck.Create (Connection_Data.Docker, "Deck");
-      Connection_Data.Deck.Box_Height (100, "%");
+      Connection_Data.Deck.Create (Connection_Data.Docker.all, "Deck");
+--    Connection_Data.Deck.Box_Height (100, "%");
       Connection_Data.Docker.Fill_Dock (Connection_Data.Deck'Access);
 
       Connection_Data.Cards.Create (Connection_Data.Deck, "Cards");
