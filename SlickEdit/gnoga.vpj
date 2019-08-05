@@ -3,26 +3,37 @@
     Version="10.0"
     VendorName="SlickEdit"
     TemplateName="(Other)"
-    WorkingDir=".">
+    WorkingDir="../../../vendor/gnoga-code/">
     <Config
         Name="Release"
         OutputFile=""
         CompilerConfigName="">
         <Menu>
             <Target
-                Name="Compile"
-                MenuCaption="&amp;Compile"
+                Name="install"
+                MenuCaption="install"
+                RunFromDir="/Users/wayne/vendor/gnoga-code/"
                 CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveCurrent"
-                RunFromDir="%rw">
-                <Exec/>
+                SaveOption="SaveNone">
+                <Exec CmdLine="./build.sh uninstall install"/>
             </Target>
             <Target
                 Name="Build"
                 MenuCaption="&amp;Build"
                 CaptureOutputWith="ProcessBuffer"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
+                SaveOption="SaveAll"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1"
+                Beep="1">
+                <Exec CmdLine="./build.sh release"/>
+            </Target>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveAll"
+                RunFromDir="%rw"
+                ClearProcessBuffer="1">
                 <Exec/>
             </Target>
             <Target
@@ -71,13 +82,25 @@
             Filters=""
             GUID="{7E3D1416-5C04-4EDB-ABC1-3C426C1DB37A}">
             <F
-                N="/vendor/gnoga-aunit/components/message_boxes/*.ad*"
-                Recurse="1"
-                Excludes=""/>
+                N="../../../vendor/gnoga-code/components/message_boxes/src/*.ad*"
+                Recurse="0"
+                Excludes=".git/"/>
             <F
-                N="/vendor/gnoga-aunit/src/*.ad*"
+                N="../../../vendor/gnoga-code/src/*.ad*"
                 Recurse="1"
-                Excludes=""/>
+                Excludes=".git/"/>
+            <F
+                N="../../../vendor/gnoga-code/*.gpr"
+                Recurse="0"
+                Excludes=".git/"/>
+            <F
+                N="../../../vendor/gnoga-code/components/message_boxes/src/*.gpr"
+                Recurse="0"
+                Excludes=".git/"/>
+            <F
+                N="../../../vendor/gnoga-code/src/*.gpr"
+                Recurse="0"
+                Excludes=".git/"/>
         </Folder>
     </Files>
 </Project>

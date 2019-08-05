@@ -128,7 +128,7 @@ package body Docker_Child_Tests is
             Select_Card => False);
 --          Card_ID     => "card 3");
       Card_3.Fill_Dock (Card_3.Child_1'access);
-      Card_3.Top_Dock (Card_3.Child_2'access);
+      Card_3.Left_Dock (Card_3.Child_2'access);
       Card_3.Right_Dock (Card_3.Child_3'access);
 
       Log (Debug, Here, Who & " exit");

@@ -87,10 +87,10 @@ procedure Main is
       Put_Line ("   -t                             include time stamp on output");
       New_Line;
       Put_Line ("  <test suite>");
-      Put_Line ("   c                              CAC.Trace");
+--    Put_Line ("   c                              CAC.Trace");
       Put_Line ("   d                              docker");
       Put_Line ("   m                              main");
-      Put_Line ("   t                              tests");
+--    Put_Line ("   t                              top window");
 
       CAC.OS.Immediate_Halt (0);
    end Help;
@@ -98,7 +98,7 @@ procedure Main is
    Break_Handler                 : aliased Interrupt_Handler.Handler_Type;
    Do_Docker_Suite               : boolean := True;
    Do_Main_Suite                 : boolean := True;
-   Do_Top_Window_Suite           : boolean := True;
+-- Do_Top_Window_Suite           : boolean := True;
    Filter                        : aliased CAC.Unit_Test.Expression_Filter.Filter_Type;
    Iterator                      : Command_Line_Iterator.Iterator_Type :=
                                     Command_Line_Iterator.Initialize (
@@ -150,7 +150,7 @@ begin
                   when 's' =>    -- suites to include
                      Do_Docker_Suite := False;
                      Do_Main_Suite := False;
-                     Do_Top_Window_Suite := False;
+--                   Do_Top_Window_Suite := False;
 
                      declare
                         Options     : constant String := Iterator.Get_Parameter;
@@ -165,8 +165,8 @@ begin
                            when 'm' =>
                               Do_Main_Suite := True;
 
-                           when 't' =>
-                              Do_Top_Window_Suite := True;
+--                         when 't' =>
+--                            Do_Top_Window_Suite := True;
 
                            when others =>
                               Put_Line ("unexpected suite option '" & Suite & "'");
@@ -189,8 +189,8 @@ begin
                            when 'm' =>
                               Do_Main_Suite := False;
 
-                           when 't' =>
-                              Do_Top_Window_Suite := False;
+--                         when 't' =>
+--                            Do_Top_Window_Suite := False;
 
                            when others =>
                               Put_Line ("unexpected suite option '" & Suite & "'");
@@ -311,11 +311,11 @@ begin
          Log (Framework.Debug, Here, Who & " end main suite");
       end if;
 
-      if Do_Top_Window_Suite then
-         Log (Framework.Debug, Here, Who & " start Top_Window suite");
+--    if Do_Top_Window_Suite then
+--       Log (Framework.Debug, Here, Who & " start Top_Window suite");
 --       Top_Window_Suite_Runner (Reporter, Options);
-         Log (Framework.Debug, Here, Who & " end Top_Window suite");
-      end if;
+--       Log (Framework.Debug, Here, Who & " end Top_Window suite");
+--    end if;
 
    exception
       when Fault: others =>
